@@ -1,5 +1,7 @@
 import { Text, StyleSheet, View,ScrollView,Pressable,ImageBackground,Image} from 'react-native'
 import React, { Component } from 'react'
+import { Ionicons } from '@expo/vector-icons'
+
 
 export default function MisEventos(){
 
@@ -9,12 +11,9 @@ export default function MisEventos(){
         style={styles.fondo}
         >
         <View style={styles.separador}>
-            <Image
-            style={styles.logo}
-            source={require('../assets/profile.png')}
-           
-            />
-
+         
+            <Ionicons name="person-circle-outline" size ={60} color='white'/>  
+    
              <Image
             style={styles.logo}
             source={require('../assets/LogoPI.png')}
@@ -29,7 +28,11 @@ export default function MisEventos(){
 
             <View style={styles.SupPart}>
 
-                <Text> hola</Text>
+                <Image
+                
+                style={styles.imageneventos}
+                source={require('../assets/imagenEventos1.webp')}
+                />
 
             </View>
             <View style={styles.SupMed}>
@@ -38,13 +41,23 @@ export default function MisEventos(){
                 <Text style={styles. textoInterno}>Descripcion de Evento</Text>
                 </View>
 
-                <View>
-                    <Text>HOLAAA</Text>
+                <View style={styles.separadoricons}>
+                    <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
+                    <Text style={styles.textoicons}>Sab,25Nov-2026-8:00am</Text>
                 </View>
+                <View style={styles.separadoricons}>
+                    <Ionicons name="location-outline" size={25} color='#3d3d3dff'/>
+                     <Text style={styles.textoicons}>Ubicacion,colonia</Text>
+                </View>  
+                <View style={styles.separadoricons}> 
+                    <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
+                     <Text style={styles.textoicons}>0/450 asistentes</Text>
+                </View >                             
             </View>
             <View style={styles.separadorbotones}>
        
                 <Pressable style={styles.botonVer}>
+                <Ionicons name="eye-outline" size={22} color='white'/>
                     <Text style={styles.textoBoton}>VER</Text>
                 </Pressable>  
                 <Pressable style={styles.boton}>
@@ -93,6 +106,14 @@ const styles = StyleSheet.create({
         width:70,
         zIndex:2,
         marginTop:0,
+    },
+    separadoricons:{
+        flexDirection:'row',
+        justifyContent:'start',
+        alignItems:'center',
+        gap:5,
+        marginTop:10, 
+        marginLeft:15,      
     },
     separador:{
         flexDirection:'row',
@@ -161,15 +182,16 @@ textoBoton:{
     separadorbotones:{
         flexDirection:'row',
         justifyContent:'space-between',
-        alignItems:'center',  
-        
-        marginTop:10,
+        alignItems:'center',         
+        marginTop:0,
         gap:20,
     },
     botonVer:{
+    flexDirection:'row',
+    gap:5,
     backgroundColor:'#aeaeaeff',
     paddingVertical:12,
-    width:150,
+    width:130,
     borderRadius:20,
     elevation:5,
     shadowColor:'#00000056',
@@ -192,13 +214,14 @@ textoBoton:{
     SupMed:{
         width:'80%',    
         height:'35%',
-       // backgroundColor:'#dbdbdbff',
-        backgroundColor:'#17c38fff',    
+        marginTop:10,
+        backgroundColor:'#dbdbdbff',
+      //  backgroundColor:'#17c38fff',    
         borderRadius:20,
     },
     textoInternotitulo:{
         fontSize:17,
-        color:'#fff',
+        color:'#454545ff',
         marginLeft:8,
         fontWeight:'550',
         marginTop:5,    
@@ -206,11 +229,30 @@ textoBoton:{
     },
      textoInterno:{
         fontSize:14,
-        color:'#fff',
+        color:'#575757ff',
         marginLeft:8,
         fontWeight:'550',
         marginTop:5,     
        // justifyContent:'flex-end' ,
     },   
+    iconMarco:{
+        width:55,
+        height:55,
+        borderRadius:27.5,
+        borderWidth:4,
+        borderColor:'white',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    textoicons:{
+        fontSize:15,
+        color:'#3a3a3aff',
+    },
+    imageneventos:{
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',  
+    borderRadius: 20,      
+}
 
 })
