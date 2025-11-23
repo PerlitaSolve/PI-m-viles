@@ -1,6 +1,7 @@
-import { Text, StyleSheet, View,ScrollView,Pressable,ImageBackground,Image} from 'react-native'
+import { Text, StyleSheet, View,ScrollView,Pressable,ImageBackground,Image,TextInput} from 'react-native'
 import React, { Component } from 'react'
 import { Ionicons } from '@expo/vector-icons'
+
 
 
 export default function MisEventos(){
@@ -22,6 +23,15 @@ export default function MisEventos(){
         </View>
         <Text style={styles.textotitulo}>MIS EVENTOS</Text>
         <Text style={styles.texto}>Visualiza los eventos a los que te has unido</Text>
+        <View style={styles.buscadorContainer}>
+            <Ionicons name="search-outline" size={22} color='#000'/>
+        <TextInput
+        style={styles.buscadorInput}
+        placeholder='Buscar Evento'
+        placeholderTextColor='#777'
+        />
+        </View>
+
         <ScrollView>
         <View style={styles.Cuadroevento}>
          <View style={styles.Cuadrointerno}>
@@ -201,7 +211,7 @@ const styles = StyleSheet.create({
     textotitulo:{
         fontSize:22,
         color:'#fff',
-        marginTop:30,
+        marginTop:5,
         letterSpacing:.5,
         fontWeight:'550',
     },
@@ -329,6 +339,24 @@ textoBoton:{
     height: '100%',
     resizeMode: 'cover',  
     borderRadius: 20,      
+},
+buscadorContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    backgroundColor:'#fff',
+    width:'60%',
+    borderRadius:30,
+    borderWidth:2,
+    borderColor:'#0099b0ff',
+    paddingHorizontal:15,
+    paddingVertical:8,
+    marginBottom:10,
+    gap:10
+},
+buscadorInput:{
+    flex:1,
+    fontSize:14,
+    fontWeight:'500',
+    color:'#333'
 }
-
 })
