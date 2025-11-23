@@ -67,14 +67,90 @@ export default function MisEventos(){
 
             </View>
         </View>
-        <View style={styles.Cuadroevento}>
+        <View style={styles.Cuadroevento}>            
              <View style={styles.Cuadrointerno}>
+            <View style={styles.SupPart}>
+
+                <Image
+                
+                style={styles.imageneventos}
+                source={require('../assets/imagenEventos1.webp')}
+                />
+
+            </View>
+            <View style={styles.SupMed}>
+                <View>
+                <Text style={styles. textoInternotitulo}>Nombre del Evento</Text>
+                <Text style={styles. textoInterno}>Descripcion de Evento</Text>
+                </View>
+
+                <View style={styles.separadoricons}>
+                    <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
+                    <Text style={styles.textoicons}>Sab,25Nov-2026-8:00am</Text>
+                </View>
+                <View style={styles.separadoricons}>
+                    <Ionicons name="location-outline" size={25} color='#3d3d3dff'/>
+                     <Text style={styles.textoicons}>Ubicacion,colonia</Text>
+                </View>  
+                <View style={styles.separadoricons}> 
+                    <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
+                     <Text style={styles.textoicons}>0/450 asistentes</Text>
+                </View >                             
+            </View>
+            <View style={styles.separadorbotones}>
+       
+                <Pressable style={styles.botonVer}>
+                <Ionicons name="eye-outline" size={22} color='white'/>
+                    <Text style={styles.textoBoton}>VER</Text>
+                </Pressable>  
+                <Pressable style={styles.boton}>
+                    <Text style={styles.textoBoton}>CANCELAR EVENTO</Text>
+                </Pressable>                      
+            </View>               
 
             </View>
 
         </View>
         <View style={styles.Cuadroevento}>
              <View style={styles.Cuadrointerno}>
+            <View style={styles.SupPart}>
+
+                <Image
+                
+                style={styles.imageneventos}
+                source={require('../assets/imagenEventos1.webp')}
+                />
+
+            </View>
+            <View style={styles.SupMed}>
+                <View>
+                <Text style={styles. textoInternotitulo}>Nombre del Evento</Text>
+                <Text style={styles. textoInterno}>Descripcion de Evento</Text>
+                </View>
+
+                <View style={styles.separadoricons}>
+                    <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
+                    <Text style={styles.textoicons}>Sab,25Nov-2026-8:00am</Text>
+                </View>
+                <View style={styles.separadoricons}>
+                    <Ionicons name="location-outline" size={25} color='#3d3d3dff'/>
+                     <Text style={styles.textoicons}>Ubicacion,colonia</Text>
+                </View>  
+                <View style={styles.separadoricons}> 
+                    <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
+                     <Text style={styles.textoicons}>0/450 asistentes</Text>
+                </View >                             
+            </View>
+            <View style={styles.separadorbotones}>
+       
+                <Pressable style={styles.botonVer}>
+                <Ionicons name="eye-outline" size={22} color='white'/>
+                    <Text style={styles.textoBoton}>VER</Text>
+                </Pressable>  
+                <Pressable style={styles.boton}>
+                    <Text style={styles.textoBoton}>CANCELAR EVENTO</Text>
+                </Pressable>                      
+            </View>               
 
          </View>
 
