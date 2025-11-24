@@ -3,10 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/Login';
 import Registro from './screens/Registro';
 import MisEventos from './screens/MisEventos';
+import Notificaciones from './screens/Notificaciones';
 
 export default function App() {
   return (
-    <MisEventos/>
+    <Notificaciones/>
   );
 }
 
