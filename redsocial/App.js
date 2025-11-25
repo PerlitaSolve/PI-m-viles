@@ -6,11 +6,12 @@ import Registro from './screens/Registro';
 import MisEventos from './screens/MisEventos';
 import Notificaciones from './screens/Notificaciones';
 import Contra from './screens/Contra';
+import EditarEvento from './screens/EditarEvento';
 
 
 export default function App() {
   return (
-    <Contra/>
+    <EditarEvento/>
   );
 }
 
