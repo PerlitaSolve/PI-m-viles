@@ -24,11 +24,11 @@ export default function EditarEvento(){
             <View style={styles.container}>
                 <View>
                     <View style={styles.centrarTitulo}>
-                     <Text>hola</Text>
+                     <Text style={styles.label}>Título del Evento</Text>
                     </View>
 
                      <TextInput
-                     placeholder='adios'
+                    
                      style={styles.inputPrincipal}
                      />
                      
@@ -36,43 +36,71 @@ export default function EditarEvento(){
                     <View style={styles.fila}>
                         
                         <View style={styles.columna}>
-                            <Text style={styles.label}>Fecha</Text>
+                            <View style={styles.iconLocation3}>
+                                <Ionicons name="chevron-down-outline" size={20} color="#777"/>
+                            </View>
+                            <Text style={styles.label}>Categoría</Text>
                             <TextInput
-                                placeholder='Fecha'
+                               
                                 style={styles.inputPeqes}
                             />
                         </View>
 
                         <View style={styles.columna}>
-                            <Text style={styles.label}>Categoría</Text>
+                            <Text style={styles.label}>Fecha</Text>
                             <TextInput
-                                placeholder='Categoría'
+                                placeholder='DD/MM/AAAA'
                                 style={styles.inputPeqes}
+                                placeholderTextColor='#777'
                             />
                         </View>
 
                     </View>
                 <View styles={styles.columna}>
-                    <Text style={styles.textoDescripcion}>holaaa</Text>
+                    <Text style={styles.labelDescripcion}>Descripcion del Evento</Text>
                     <TextInput
                     style={styles.inputDescripcion}
                     multiline={true}
                     />
                 </View>
             <View style={styles.contFotos}>
-                <View style={styles.foto1}>
-                </View>
-                 <View style={styles.foto2}>
-                </View>
-                <View style={styles.iconPLus}>
-                    <Ionicons name="add-circle-outline" size={30} color='#000'/>
-                </View>
+                <Image
+                source={require('../assets/ImagenEventos2.jpeg')}
+                style={styles.foto2}
+                />
+                <Image
+                source={require('../assets/imagenEventos1.webp')}
+                style={styles.foto1}
+                />
                                
             </View>
                 <View style={styles.separadoricons}>
-                    <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
-                    <Text style={styles.textoicons}>Sab,25Nov-2026-8:00am</Text>
+                    <TextInput
+                    placeholder='Ubicacion'
+                    placeholderTextColor='#777'
+                    style={styles.inputPeqes}
+                    />
+                   
+                    
+                    <View style={styles.iconLocation2}>
+                      <Ionicons name="location-outline" size={35} color='#3d3d3dff'/>
+                    </View>   
+                    <View style={styles.alinear}>
+                    <Pressable style={styles.boton1}>
+                        <Text style={styles.textoBoton1}>Añadir Foto</Text>
+                    </Pressable>                   
+                    </View>                 
+
+                   
+                    
+                    
                 </View>
+                <Pressable style={styles.boton2}>
+                    <Text style={styles.textoBoton}>ACTUALIZAR</Text>
+                </Pressable>
+                
+
+               
                 
             </View>
 
@@ -98,6 +126,7 @@ const styles = StyleSheet.create({
         borderRadius:25,
         justifyContent:'flex-start',
         alignItems:'center',
+
     // flex:1,
     },
     separador:{
@@ -128,18 +157,28 @@ const styles = StyleSheet.create({
         marginBottom:15,
     },
     inputPrincipal:{
-        padding:10,
-        width:200,
-        backgroundColor:'#777',
-        borderRadius:70,
+        padding:8,
+        width:225,
+        backgroundColor:'#e2dedeff',
+        borderRadius:10,
         flex:1,
+        shadowColor:'#c0bdbdff',
+        shadowOffset:{
+            width:0,
+            height:3,
+        },         
     },
     inputPeqes:{
-        padding:10,
+        padding:8,
         width:125,
-        backgroundColor:'#777',
-        borderRadius:70,
+        backgroundColor:'#e2dedeff',
+        borderRadius:10,
         flex:1,
+        shadowColor:'#c0bdbdff',
+        shadowOffset:{
+            width:0,
+            height:3,
+        },         
     },
     centrarTitulo:{
         justifyContent:'center',
@@ -152,11 +191,12 @@ const styles = StyleSheet.create({
     gap:80,
     marginTop:15,
     },
-    textoDescripcion:{
+    labelDescripcion:{
     marginTop:19,
-    marginBottom:15,
-    fontSize:16,
+    marginBottom:5,
+    fontSize:16.5,
     fontWeight:'500',
+    color:'#042674ff',
 
     },
 
@@ -166,23 +206,29 @@ const styles = StyleSheet.create({
     },
 
     label:{
-        fontSize:16,
+        fontSize:16.5,
         fontWeight:'500',
         marginBottom:5,
+        color:'#042674ff',
     },
     inputDescripcion:{
         width:300,
         height:150,
         padding:10,
-        backgroundColor:'#777',
+        backgroundColor:'#e2dedeff',
         borderRadius:10,
         textAlignVertical:'top',
         textAlign:'left',
+        shadowColor:'#c0bdbdff',
+        shadowOffset:{
+            width:0,
+            height:3,
+        },        
     },
     foto1:{
         width:200,
         height:120,
-        backgroundColor:'#721717ff',     
+        backgroundColor:'#6e6e6eff',     
         marginBottom:15,
         overflow:'hidden',
         position:'absolute',  
@@ -190,6 +236,11 @@ const styles = StyleSheet.create({
         zIndex:9,  
         top:10,
         borderRadius:20,
+        shadowColor:'#373636ff',
+        shadowOffset:{
+            width:3,
+            height:3,
+        },
     },
     foto2:{
         width:200,
@@ -201,6 +252,11 @@ const styles = StyleSheet.create({
         zIndex:10,
         borderRadius:20,
         top:-10,
+        shadowColor:'#373636ff',
+        shadowOffset:{
+            width:3,
+            height:3,
+        },   
     },
     contFotos:{
     width:'100%',
@@ -219,11 +275,74 @@ const styles = StyleSheet.create({
     },
     separadoricons:{
         flexDirection:'row',
-        justifyContent:'start',
+        justifyContent:'flex-start',
         alignItems:'center',
-        gap:5,
+        gap:50,
         marginTop:10, 
         marginLeft:15,      
     },
+    iconLocation:{
+        overflow:'hidden',
+        position:'absolute',
+        bottom:1,
+        right:5,
 
+    },
+    iconLocation2:{
+        overflow:'hidden',
+        position:'absolute',
+        bottom:-2,
+        right:172,
+
+    },   
+    iconLocation3:{
+        overflow:'hidden',
+        position:'absolute',
+        bottom:4,
+        right:2,
+
+    },
+    boton2:{
+        backgroundColor:'#abb6ffff',
+        width:120,
+        height:40,
+        borderRadius:20,
+        paddingVertical:6,
+        alignItems:'center',
+        justifyContent:'center',
+        shadowColor:'#c7c7c7ff',
+        marginTop:20,
+        shadowOffset:{
+            height:3,
+            width:0,
+        },
+    },
+    textoBoton:{
+        fontSize:16,
+        fontWeight:'500',
+        color:'white',
+    },
+    textoBoton1:{
+        fontSize:16,
+        fontWeight:'500',
+        color:'white',
+    },    
+    alinear:{
+        textAlign:'left',
+        justifyContent:'flex-start',
+    },
+    boton1:{
+        backgroundColor:'#5bc86dff',
+        width:125,
+        height:34,
+        borderRadius:10,
+        paddingVertical:6,
+        alignItems:'center',
+        justifyContent:'center',
+        shadowColor:'#c0bdbdff',
+        shadowOffset:{
+            height:3,
+            width:0,
+        },
+    },
 })
