@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './screens/Login';
-import Sesion from './screens/Sesion';
-import Registro from './screens/Registro';
+import { NavigationContainer } from '@react-navigation/native';
+import LoginStack from './screens/login/loginStack';
+import Sesion from './screens/login/Sesion';
+// import Registro from './screens/Registro';
 import MisEventos from './screens/MisEventos';
 import Notificaciones from './screens/Notificaciones';
-import Contra from './screens/Contra';
+// import Contra from './screens/Contra';
 import EditarEvento from './screens/EditarEvento';
 
 
@@ -13,9 +14,9 @@ import EditarEvento from './screens/EditarEvento';
 
 export default function App() {
   return (
-
-
-    <EditarEvento/>
+      <NavigationContainer>
+        <LoginStack />
+      </NavigationContainer>
   );
 }
 

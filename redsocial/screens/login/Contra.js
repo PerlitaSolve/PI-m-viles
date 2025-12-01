@@ -2,17 +2,17 @@ import { StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground, S
 import React from 'react'
 
 
-export default function Contra() {
+export default function Contra({navigation}) {
   return (
     
         <ImageBackground
-            source={require('../assets/Fondo1.png')}
+            source={require('../../assets/Fondo1.png')}
             style={styles.fondo}
         >
 
             <View style={styles.container}>
                 
-                    <Image source={require('../assets/LogoPI.png')} style={styles.logo}/>
+                    <Image source={require('../../assets/LogoPI.png')} style={styles.logo}/>
 
                 <View style={styles.cuadro}>
                     <View>
@@ -32,7 +32,7 @@ export default function Contra() {
                         <Text style={styles.text}>Confirmar Contraseña</Text>
                         <TextInput placeholder='Contraseña' style={styles.input} secureTextEntry={true}></TextInput>
 
-                        <Pressable style={styles.boton}>
+                        <Pressable style={styles.boton} onPress={() => navigation.navigate('Login')}>
                             <Text style={styles.bText}>INICIAR SESION</Text>
                         </Pressable>
 

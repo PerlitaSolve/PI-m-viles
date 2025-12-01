@@ -1,16 +1,36 @@
-import { Text, StyleSheet, View,Image,ImageBackground,TextInput,Pressable} from 'react-native'
-import React, { Component } from 'react'
-
-export default function Registro() {
-
+import { Text, StyleSheet, View,Image,ImageBackground,TextInput,Pressable, Alert} from 'react-native'
+import React, { Component } from 'react';
+import { useState, useEffect} from 'react';
+import { LoginController } from '../../Controllers/loginCotroller';
+const controller = new LoginController();
+export default function Registro({navigation}) {
+    const [nombre, setNombre]= useState('');
+    const [email, setEmail]= useState('');
+    const [password, setPassword]= useState('');
+    const [telefono, setTelefono]= useState('');
+    const [grupo, setGrupo]= useState('');
+    useEffect(()=>{
+        (async()=>{
+            await controller.initialize();
+        })();
+    }, []);
+    const registrandoUsuario= async()=>{
+        try{
+            const usuarioCreado= await controller.registrarUsuario(email,password,nombre,telefono,grupo);
+            Alert.alert(`Registro compleatado, ${usuarioCreado.nombre_usuario}. Puedes Iniciar Sesión`);
+            setNombre(''); setEmail(''); setPassword(''); setTelefono(''); setGrupo('');
+            navigation.navigate('Sesion');
+        }catch(error){
+            Alert.alert(error.message);
+        }
+    }
     return (
-
         <ImageBackground
-        source={require('../assets/Fondo1.png')}
+        source={require('../../assets/Fondo1.png')}
         style={styles.fondo}
         >
         <View style={styles.logo}>
-            <Image source={require('../assets/LogoPI.png')}
+            <Image source={require('../../assets/LogoPI.png')}
              style={styles.logoima}/> 
              <Text style={styles.texto}>Nombreeee</Text>
            
@@ -22,34 +42,44 @@ export default function Registro() {
             <View style={styles.cajaPrincipal}>
                 <Text style={styles.textoContainer}>Correo Electronico</Text>
                 <TextInput
-                style={styles.textInput}
-                placeholder='hola'
-                ></TextInput>
-               <Text style={styles.textoContainer}>Contraseña</Text>
+                    value={email}
+                    onChangeText={setEmail}
+                    style={styles.textInput}
+                    placeholder='hola' //email, password, nombre_usuario, telefono, grupo
+                />
+                <Text style={styles.textoContainer}>Contraseña</Text>
                 <TextInput
-                style={styles.textInput}
-                placeholder='contrasena'
-                ></TextInput>  
+                    value={password}
+                    onChangeText={setPassword}
+                    style={styles.textInput}
+                    placeholder='contrasena'
+                />  
                 <Text style={styles.textoContainer}>Nombre de Usuario</Text>
                 <TextInput
-                style={styles.textInput}
-                placeholder='Nombre'
-                ></TextInput>
-               <Text style={styles.textoContainer}>Telefono</Text>
+                    style={styles.textInput}
+                    placeholder='Nombre'
+                    value={nombre}
+                    onChangeText={setNombre}
+                />
+                <Text style={styles.textoContainer}>Telefono</Text>
                 <TextInput
-                style={styles.textInput}
-                placeholder='telefono'
-                ></TextInput>   
-               <Text style={styles.textoContainer}>Grupo</Text>
+                    style={styles.textInput}
+                    placeholder='telefono'
+                    value={telefono}
+                    onChangeText={setTelefono}
+                />   
+                <Text style={styles.textoContainer}>Grupo</Text>
                 <TextInput
-                style={styles.textInput}
-                placeholder='Grupo'
-                ></TextInput> 
+                    style={styles.textInput}
+                    placeholder='Grupo'
+                    value={grupo}
+                    onChangeText={setGrupo}
+                /> 
                 <View>
-                    <Pressable style={styles.boton}>
+                    <Pressable style={styles.boton} onPress={registrandoUsuario}>
                         <Text style={styles.textoBoton}>REGISTRAR</Text>
                     </Pressable>
-                    <Pressable style={styles.Cancelar}>
+                    <Pressable style={styles.Cancelar} onPress={() => navigation.goBack()}>
                         <Text style={styles.textoCancelar}>CANCELAR</Text>
                     </Pressable>                    
                 </View>                                                 

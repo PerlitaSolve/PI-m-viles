@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View, ImageBackground, Pressable, Image, Button } from 'react-native'
 import React, {useState}from 'react'
 
-export default function Login() {
+export default function Login({navigation}) {
   return (
     <ImageBackground
-        source={require('../assets/Fondo1.png')}
+        source={require('../../assets/Fondo1.png')}
         style={styles.fondo}
     >
         <View>
             <View style={styles.container}>
-             <Image source={require('../assets/LogoPI.png') } style={styles.logo}/>
+             <Image source={require('../../assets/LogoPI.png') } style={styles.logo}/>
              <Text style={styles.mensaje}>"Explora eventos increíbles,</Text>
              <Text style={styles.mensaje}>conoce personas con tus</Text>
              <Text style={styles.mensaje}>mismos interese y crea</Text>
@@ -18,8 +18,11 @@ export default function Login() {
             </View>
 
             <View style={styles.container2}>
-                <Pressable style={styles.boton1}>INICIAR SESIÓN</Pressable>
-                <Pressable style={styles.boton}>REGISTRARSE</Pressable>
+                <Pressable style={styles.boton1} onPress={()=>navigation.navigate('Sesion')}><Text style={styles.textButton}>INICIAR SESIÓN</Text></Pressable>
+                <Pressable style={styles.boton} onPress={()=> navigation.navigate('Registro')}><Text  style={styles.textButton}>REGISTRARSE</Text></Pressable>
+                <Pressable onPress={() => navigation.navigate('Recuperar')} style={{marginTop:12}}>
+                    <Text style={{color:'#fff', textDecorationLine:'underline'}}>¿Olvidaste tu contraseña?</Text>
+                </Pressable>
             </View>
         </View>
     </ImageBackground>
@@ -73,9 +76,12 @@ const styles = StyleSheet.create({
     boton:{
         paddingVertical:15,
         paddingHorizontal:100,
+       
+    },
+    textButton:{
         color:'#fff',
         fontSize:14,
         fontFamily:"Instrument Sans",
-    },
+    }
 
 })
