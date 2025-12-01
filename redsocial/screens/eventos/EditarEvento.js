@@ -2,7 +2,7 @@ import { Text, StyleSheet, View ,ImageBackground,Image,Pressable,TextInput} from
 import React, { Component } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 
-export default function EditarEvento(){
+export default function EditarEvento({navigation}) {
 
     return (
         <ImageBackground

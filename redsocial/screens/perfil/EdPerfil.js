@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, Pressable, ScrollView } from 'react-native'
 import React from 'react'
+import { Ionicons } from '@expo/vector-icons';
 
 
 
-export default function Perfil() {
+
+export default function Perfil({navigation}) {
   return (
     <ScrollView>
     <ImageBackground
@@ -25,6 +27,10 @@ export default function Perfil() {
           <View style={{alignItems:'center', justifyContent:'center', marginBottom:20, marginTop:20}}>
             <Image source={require('../assets/Lperfil.png')}
             style={styles.foto}/>
+
+            <Pressable style={styles.iconCamara}>
+                <Ionicons name="camera" size={28} color="#fff" />
+            </Pressable>
           </View>
 
           <Text style={styles.text2}>Nombre de Usuario</Text>
@@ -34,20 +40,32 @@ export default function Perfil() {
 
         <View style={styles.cuadro}>
           <View>
-              <Text style={styles.text}>Nombre</Text>
-              <TextInput placeholder='Nombre Completo' style={styles.input}></TextInput>
-              
-              <Text style={styles.text}>Grupo</Text>
-              <TextInput placeholder='Grupo' style={styles.input}></TextInput>
+                <View>
+                <Text style={styles.text}>Nombre</Text>
+                <TextInput placeholder='Nombre Completo' style={styles.input}></TextInput>
+                <Ionicons name="pencil" size={20} color="#555" style={styles.pencil}/>
+                </View>
 
-              <Text style={styles.text}>Telefono</Text>
-              <TextInput placeholder='Telefono' style={styles.input} keyboardType='numeric'></TextInput>
+                <View>
+                <Text style={styles.text}>Grupo</Text>
+                <TextInput placeholder='Grupo' style={styles.input}></TextInput>
+                <Ionicons name="pencil" size={20} color="#555" style={styles.pencil}/>
+                </View>
 
-              <Text style={styles.text}>Correo Electrónico</Text>
-              <TextInput placeholder='@correo' style={styles.input} ></TextInput>
+                <View>
+                <Text style={styles.text}>Telefono</Text>
+                <TextInput placeholder='Telefono' style={styles.input} keyboardType='numeric'></TextInput>
+                <Ionicons name="pencil" size={20} color="#555" style={styles.pencil}/>
+                </View>
 
+                <View>
+                <Text style={styles.text}>Correo Electrónico</Text>
+                <TextInput placeholder='@correo' style={styles.input} ></TextInput>
+                <Ionicons name="pencil" size={20} color="#555" style={styles.pencil}/>
+                </View>
+                
               <Pressable style={styles.boton}>
-                  <Text style={styles.bText}>EDITAR PERFIL</Text>
+                  <Text style={styles.bText}>GUARDAR CAMBIOS</Text>
               </Pressable>
 
           </View>
@@ -149,4 +167,17 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       textAlign:'center',
   },
+  iconCamara:{
+  position:'absolute',
+  bottom:0,
+  right:0,
+  backgroundColor:'#80A0EB',
+  padding:8,
+  borderRadius:50,
+},
+pencil:{
+  position:'absolute',
+  right:15,
+  top:12,
+},
 });

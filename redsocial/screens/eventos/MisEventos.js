@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 
 
-export default function MisEventos(){
+export default function MisEventos({navigation}){
 
     return (
         <ImageBackground
