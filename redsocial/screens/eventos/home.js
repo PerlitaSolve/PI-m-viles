@@ -147,12 +147,12 @@ export default function Home({ navigation }) {
         />
       </View>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 80 }} nestedScrollEnabled={true}>
+      {/* <ScrollView contentContainerStyle={{ paddingBottom: 80 }} nestedScrollEnabled={true}> */}
 
     
         <Text style={styles.subtitulo}>Categorías populares</Text>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 15 }}>
+        {/* <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 15 }}>
           <View style={styles.categoria}>
             <Ionicons name="musical-notes-outline" size={30} color="#fff" />
             <Text style={styles.textCategoria}>Música</Text>
@@ -172,7 +172,7 @@ export default function Home({ navigation }) {
             <Ionicons name="restaurant-outline" size={30} color="#fff" />
             <Text style={styles.textCategoria}>Gastronomía</Text>
           </View>
-        </ScrollView>
+        </ScrollView> */}
 
    
         <Text style={styles.subtitulo}>Eventos recomendados</Text>
@@ -244,7 +244,7 @@ export default function Home({ navigation }) {
           </Pressable>
         </View>
  */}
-      </ScrollView>
+      {/* </ScrollView> */}
 
     </ImageBackground>
   )
