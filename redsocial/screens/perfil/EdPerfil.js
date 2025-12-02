@@ -2,9 +2,6 @@ import { StyleSheet, Text, View, ImageBackground, TextInput, Image, Pressable, S
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
-
-
-
 export default function EdPerfil({navigation}) {
   return (
     <ScrollView>

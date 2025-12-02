@@ -1,9 +1,37 @@
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, Pressable, ScrollView } from 'react-native'
-import React from 'react'
-
-
+import React, {useState,useEffect} from 'react';
+import { loginController, LoginController } from '../../Controllers/loginCotroller';
 
 export default function Perfil({navigation}) {
+  const [userData, setUserData] = useState({
+    nombre_usuario:'Cargando...',
+    grupo:'Cargando...',
+    telefono:'Cargando...',
+    email:'Cargando...',
+  });
+
+  const loadUserData = async()=>{
+    const user = loginController.getCurrentUser();
+    if(user){
+      setUserData({
+        nombre_usuario: user.nombre_usuario,
+        grupo: user.grupo,
+        telefono: user.telefono,
+        email: user.email
+      });
+    }else{
+      console.log("No hay usuarios logueados");
+    }
+  };
+
+  useEffect(()=>{
+    loginController.initialize();
+    const carga = navigation.addListener('focus',()=>{
+      loadUserData();
+    })
+    return carga;
+  },[navigation]);
+  
   return (
     <ScrollView>
     <ImageBackground

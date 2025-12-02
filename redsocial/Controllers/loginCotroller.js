@@ -69,8 +69,9 @@ export class LoginController{
     getCurrentNombre(){
         return this.currentUser? this.currentUser.nombre_usuario: null;
     }
-    gerCurrentUser(){
+    getCurrentUser(){
         return this.currentUser?this.currentUser: null;
     }
     
 }
+export const loginController = new LoginController();
