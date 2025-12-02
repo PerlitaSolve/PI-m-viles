@@ -2,7 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginStack from './screens/login/loginStack';
-
+import React, { useEffect } from 'react';
+import { LoginController } from './Controllers/loginCotroller';
+const controller= new LoginController();
 import Menu from './screens/Menu'
 import Notificaciones from './screens/Notificaciones';
 
@@ -26,6 +28,16 @@ import EventosStack from './screens/eventos/EventosStack'
 
 
 export default function App() {
+  useEffect(() => {
+    (async () => {
+      try {
+        await controller.initialize();
+        console.log('Base de datos inicializada');
+      } catch (error) {
+        console.error('Error inicializando BD:', error);
+      }
+    })();
+  }, []);
   return (
       <NavigationContainer>
         <LoginStack />

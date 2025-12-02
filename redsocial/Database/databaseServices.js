@@ -21,7 +21,7 @@ class DatabaseService {
                 grupo TEXT
             );
         `);
-        await this.db.execAsync(`
+         await this.db.execAsync(`
             CREATE TABLE IF NOT EXISTS eventos(
                 id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
                 id_usuario INTEGER,
@@ -52,7 +52,7 @@ class DatabaseService {
     //Reutiliza esto si lo necesitas Bv
     async obtenerUsuarioPorEmail(email) {
         const result = await this.db.getFirstAsync(
-            `SELECT * FROM usuarios WHERE email = ?;`,
+            `SELECT * FROM usuarios WHERE email = ?`,
             [email]
         );
         if (result) {
