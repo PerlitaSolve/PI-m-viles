@@ -16,6 +16,8 @@ class DatabaseService {
                 telefono TEXT,
                 grupo TEXT
             );
+        `);
+         await this.db.execAsync(`
             CREATE TABLE IF NOT EXISTS eventos(
                 id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
                 id_usuario INTEGER,
@@ -25,7 +27,7 @@ class DatabaseService {
                 fecha TEXT,
                 hora TEXT,
                 duracion TEXT,
-                imagen TEXT,
+                imagen TEXT
             );
         `);
     }
