@@ -30,9 +30,9 @@ export class Evento {
         if(duracion.trim() === ""){
             throw new Error('La duración no puede estar vacía')
         }
-        if(imagen.trim() === ""){
+        /* if(imagen.trim() === ""){
             throw new Error('La imagen no puede estar vacía')
-        }
+        } */
 
         if(nombre.length > 50){
             throw new Error('El nombre no puede ser más largo que 50 carácteres')

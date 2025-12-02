@@ -38,6 +38,10 @@ export default function MisEventos({navigation}){
         }
     }, [eventos]);
 
+    useEffect(() => {
+        cargarEventos();
+    }, []);
+
 
     const renderEvento=({item, index})=>(
         <View style={styles.Cuadroevento}>
@@ -52,8 +56,8 @@ export default function MisEventos({navigation}){
                 <View style={styles.SupMed}>
                     <View>
                         {/* //id_evento, id_usuario, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen */}
-                        <Text style={styles. textoInternotitulo}>{item.nombre}</Text>
-                        <Text style={styles. textoInterno}>Descripcion de Evento</Text>
+                        <Text style={styles.textoInternotitulo}>{item.nombre}</Text>
+                        <Text style={styles.textoInterno}>{item.descripcion}</Text>
                     </View>
                     <View style={styles.separadoricons}>
                         <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
@@ -166,7 +170,7 @@ export default function MisEventos({navigation}){
                 <View style={styles.cuadrodeEventos}>
                     <FlatList
                         data={eventos}
-                        keyExtractor={(item)=>item.id.toString()}
+                        keyExtractor={(item)=>item.id_evento.toString()}
                         renderItem={renderEvento}
                         ListEmptyComponent={
                             <View style={styles.emptyContainer}>
