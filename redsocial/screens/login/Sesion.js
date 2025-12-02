@@ -19,7 +19,7 @@ export default function Sesion({navigation}) {
                 setLogueado(true);
             }
         }catch(error){
-            Alert.alert(error);
+            Alert.alert(error.message);
         }
     }
     
