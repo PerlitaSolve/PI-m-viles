@@ -19,9 +19,16 @@ class DatabaseService {
                 password TEXT,
                 nombre_usuario TEXT NOT NULL,
                 telefono TEXT,
-                grupo TEXT NOT NULL
+                grupo TEXT NOT NULL,
+                seguridad TEXT
             );
         `);
+        // Si la tabla existía antes sin la columna 'seguridad', intentamos agregarla (ignoramos el error si ya existe)
+        try{
+            await this.db.execAsync(`ALTER TABLE usuarios ADD COLUMN seguridad TEXT`);
+        }catch(_){
+            // columna ya existente o no aplicable: no hacemos nada
+        }
          await this.db.execAsync(`
             CREATE TABLE IF NOT EXISTS eventos(
                 id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,10 +70,10 @@ class DatabaseService {
             );
         `);
     }
-    async registrarUsuario(email, password, nombre_usuario, telefono, grupo) {
+    async registrarUsuario(email, password, nombre_usuario, telefono, grupo, seguridad=null) {
         await this.db.runAsync(
-            `INSERT INTO usuarios (email, password, nombre_usuario, telefono, grupo) VALUES (?,?,?,?,?)`,
-            [email, password, nombre_usuario, telefono, grupo]
+            `INSERT INTO usuarios (email, password, nombre_usuario, telefono, grupo, seguridad) VALUES (?,?,?,?,?,?)`,
+            [email, password, nombre_usuario, telefono, grupo, seguridad]
         );
         return await this.obtenerUsuarioPorEmail(email);
     }
@@ -80,6 +87,19 @@ class DatabaseService {
             return result;
         } else {
             throw new Error('Usuario no encontrado');
+        }
+    }
+
+    // Recupera/actualiza la contraseña verificando la respuesta de seguridad
+    async recuperarContrasena(email, respuestaSeguridad, nuevaPassword){
+        const usuario = await this.obtenerUsuarioPorEmail(email);
+        const seguridadGuardada = usuario.seguridad || '';
+        // Comparamos normalizando a mayúsculas para evitar problemas de casing
+        if(String(seguridadGuardada).toUpperCase() === String(respuestaSeguridad || '').toUpperCase()){
+            await this.db.runAsync(`UPDATE usuarios SET password = ? WHERE email = ?`, nuevaPassword, email);
+            return await this.obtenerUsuarioPorEmail(email);
+        }else{
+            throw new Error('Respuesta de seguridad incorrecta');
         }
     }
 

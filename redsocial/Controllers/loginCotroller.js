@@ -22,7 +22,9 @@ export class LoginController{
     async registrarUsuario(email, password, nombre_usuario, telefono, grupo){
         try{
             Usuario.ValidarDatos(email, password, nombre_usuario, telefono, grupo);
-            const nuevoUsuario= await DatabaseService.registrarUsuario(email.trim(), password.trim(), nombre_usuario.trim(), telefono.trim(), grupo.trim());
+            // La respuesta de seguridad (nombre de la primera mascota) debe guardarse en MAYÚSCULAS
+            const seguridadArg = arguments.length >= 6 ? String(arguments[5]).trim().toUpperCase() : null;
+            const nuevoUsuario= await DatabaseService.registrarUsuario(email.trim(), password.trim(), nombre_usuario.trim(), telefono.trim(), grupo.trim(), seguridadArg);
             this.notifyListeners();
             return new Usuario(
                 nuevoUsuario.id_usuario,
@@ -50,6 +52,16 @@ export class LoginController{
             }else{
                 throw new Error('Contraseña incorrecta');
             }
+        }catch(error){
+            throw new Error(error.message);
+        }
+    }
+    async recuperarContrasena(email, nuevaPassword, respuestaSeguridad){
+        try{
+            if(!email || !nuevaPassword || !respuestaSeguridad) throw new Error('Faltan datos para recuperar la contraseña');
+            const respuesta = String(respuestaSeguridad).trim().toUpperCase();
+            const usuarioActualizado = await DatabaseService.recuperarContrasena(email.trim(), respuesta, nuevaPassword.trim());
+            return usuarioActualizado;
         }catch(error){
             throw new Error(error.message);
         }
