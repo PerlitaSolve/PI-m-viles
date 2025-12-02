@@ -21,8 +21,12 @@ export default function MisEventos({navigation}){
             />       
 
         </View>
-        <Text style={styles.textotitulo}>MIS EVENTOS</Text>
+        <Text style={styles.textotitulo}>MIS EVENTOS</Text>        
+        <View style={styles.separarTexto}>
+
         <Text style={styles.texto}>Visualiza los eventos a los que te has unido</Text>
+        </View>
+
         <View style={styles.buscadorContainer}>
             <Ionicons name="search-outline" size={22} color='#000'/>
         <TextInput
@@ -192,6 +196,9 @@ const styles = StyleSheet.create({
         width:70,
         zIndex:2,
         marginTop:0,
+      //  overflow:'hidden',
+       // position:'absolute',
+        //left:20,
     },
     separadoricons:{
         flexDirection:'row',
@@ -205,7 +212,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
-        gap:350,
+        gap:200,
         marginTop:10,
     },
     textotitulo:{
@@ -219,24 +226,25 @@ const styles = StyleSheet.create({
         fontSize:16,
         color:'#fff',
         margin:15,
-        fontWeight:'400'
+        fontWeight:'400',
     },
     Cuadroevento:{
-        width:400,
+        width:'95%',
         height:600,
         backgroundColor:'#fff',
         alignItems:'center',
         alignContent:'center',
         margin:15,
-        borderRadius:30,
+        borderRadius:20,
         zIndex:10,
     },
     Cuadrointerno:{ //
-        width:350,
-        height:550,
+        width:'95%',
+        height:'95%',
         backgroundColor:'#dbdbdbff',
         alignItems:'center',
-        marginTop:25,
+        alignContent:'center',
+        marginTop:15,
         borderRadius:20, 
         zIndex:11,
         shadowColor:'#7e7c7cff',
@@ -252,13 +260,14 @@ boton:{
     borderRadius:20,
     elevation:5,
     shadowColor:'#00000056',
+    marginRight:15,
     shadowOffset:{
         width:0,
         height:3,
     },
     alignItems:'center',
     justifyContent:'center',
-    marginTop:20,
+    marginTop:8,
 },
 textoBoton:{
     color:'#ffffffff',
@@ -270,14 +279,15 @@ textoBoton:{
         justifyContent:'space-between',
         alignItems:'center',         
         marginTop:0,
-        gap:20,
+        gap:15,
     },
     botonVer:{
     flexDirection:'row',
     gap:5,
     backgroundColor:'#aeaeaeff',
-    paddingVertical:12,
+    paddingVertical:10,
     width:130,
+    margin:15,
     borderRadius:20,
     elevation:5,
     shadowColor:'#00000056',
@@ -344,19 +354,25 @@ buscadorContainer:{
     flexDirection:'row',
     alignItems:'center',
     backgroundColor:'#fff',
-    width:'60%',
+    width:'70%',
     borderRadius:30,
     borderWidth:2,
     borderColor:'#0099b0ff',
-    paddingHorizontal:15,
-    paddingVertical:8,
     marginBottom:10,
-    gap:10
+    top:160,
+    gap:5,
+    overflow:'hidden',
+    position:'absolute',
+    zIndex:5,
+
 },
 buscadorInput:{
     flex:1,
     fontSize:14,
     fontWeight:'500',
     color:'#333'
+},
+separarTexto:{
+    marginBottom:20,
 }
 })
