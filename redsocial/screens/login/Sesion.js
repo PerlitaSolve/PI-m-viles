@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image, ImageBackground, Pressable, TextInput, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import MisEventos from '../eventos/EventosStack'
+import CrearEvento from '../eventos/EventosStack'
 // import { LoginController } from '../../Controllers/loginCotroller';
 // const controller = new LoginController();
 import { controller } from '../../Controllers';
@@ -25,9 +26,9 @@ export default function Sesion({navigation}) {
     }
     
   return (
-    <>
+    <>  {/* <MisEventos/> */}
         {logueado?(
-            <MisEventos/>
+            <CrearEvento/>
         ):(
 
    

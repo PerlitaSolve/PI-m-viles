@@ -24,6 +24,7 @@ import Sesion from './screens/login/Sesion';
 import EditarEvento from './screens/eventos/EditarEvento';
 import MisEventos from './screens/eventos/MisEventos';
 import EventosStack from './screens/eventos/EventosStack'
+import CrearEvento from './screens/eventos/CrearEvento';
 
 
 
@@ -41,6 +42,7 @@ export default function App() {
   return (
       <NavigationContainer>
         <LoginStack />
+        {/* <EventosStack/> */}
       </NavigationContainer>
   );
 }

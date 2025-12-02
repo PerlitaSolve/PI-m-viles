@@ -1,8 +1,35 @@
-import { StyleSheet, Text, View, ImageBackground, Image, Pressable, TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, ImageBackground, Image, Pressable, TextInput, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
+import { EventoController } from '../../Controllers/eventoController'
 
 export default function CrearEvento({navigation}) {
+  const [nombre, setNombre] = useState("")
+  const [descripcion, setDescripcion] = useState("")
+  const [ubicacion, setUbicacion] = useState("")
+  const [fecha, setFecha] = useState("")
+  const [hora, setHora] = useState("")
+  const [duracion, setDuracion] = useState("")
+  const [imagen, setImagen] = useState("")
+
+  const eventoController = new EventoController()
+
+
+  async function handleCrearEvento() {
+    try {
+      await eventoController.crearEvento(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen)
+      Alert.alert("Evento creado exitosamente")
+
+      navigation.navigate('MisEventos')
+    } catch (error) {
+      console.error(error)
+      Alert.alert("No se pudo crear el evento")
+    }
+  }
+
+
+
+
   return (
     <ImageBackground 
     style={styles.fondo}
@@ -24,27 +51,27 @@ export default function CrearEvento({navigation}) {
       <View style={styles.cuadro}>
         <View>
             <Text style={styles.subtitulo}>Nombre del Evento</Text>
-            <TextInput placeholder='Nombre del evento' style={styles.input}></TextInput>
+            <TextInput placeholder='Nombre del evento' style={styles.input} value={nombre} onChangeText={setNombre}></TextInput>
             
             <Text style={styles.subtitulo}>Descripcion</Text>
-            <TextInput placeholder='Descripcion' style={styles.input}></TextInput>
+            <TextInput placeholder='Descripcion' style={styles.input} value={descripcion} onChangeText={setDescripcion}></TextInput>
 
             <View style={styles.hf}>
               <Text style={styles.subtitulo}>Fecha</Text>
-              <TextInput placeholder='dd/mm/aaaa' style={styles.input2}></TextInput>
+              <TextInput placeholder='dd/mm/aaaa' style={styles.input2} value={fecha} onChangeText={setFecha}></TextInput>
 
               <Text style={styles.subtitulo}>Hora</Text>
-              <TextInput placeholder='hh:mm' style={styles.input2} ></TextInput>
+              <TextInput placeholder='hh:mm' style={styles.input2} value={hora} onChangeText={setHora}></TextInput>
             </View>
 
 
             <Text style={styles.subtitulo}>Lugar del Evento</Text>
-            <TextInput placeholder='Lugar del Eventos' style={styles.input}></TextInput>
+            <TextInput placeholder='Lugar del Eventos' style={styles.input} value={ubicacion} onChangeText={setUbicacion}></TextInput>
 
             <Text style={styles.subtitulo}>Duracion del evento</Text>
-            <TextInput placeholder='Duracion' style={styles.input}></TextInput>
+            <TextInput placeholder='Duracion' style={styles.input} value={duracion} onChangeText={setDuracion}></TextInput>
 
-              <Pressable style={styles.boton} onPress={()=> navigation.navigate('MisEventos')}>
+              <Pressable style={styles.boton} onPress={handleCrearEvento}>
                 <Text style={styles.bText}>CREAR EVENTO</Text>
             </Pressable>
 

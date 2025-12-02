@@ -91,16 +91,16 @@ class DatabaseService {
         return await this.db.getAllAsync(`SELECT * FROM eventos`)
     }
     async getAllEventosUsuario() {
-        //const userId = this.getCurrentUserId();  
-        //const userId = 1
+        const userId = controller.getCurrentUserId();  
+        ///* const userId = 1 */
         const userID= controller.getCurrentUserId();
         return await this.db.getAllAsync(`SELECT * FROM eventos WHERE id_usuario = ?`, userID)
     }
     // TODO: AGREGAR ID_USUARIO
 
     async addEvento(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen) {
-        /* const userId = this.getCurrentUserId() */
-        const userId = 1
+        const userId = controller.getCurrentUserId();
+        /* const userId = 1 */
         /* Evento.validarDatos(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen) */
         const result = await this.db.runAsync(`INSERT INTO eventos (id_usuario, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen)
             VALUES(?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -109,8 +109,8 @@ class DatabaseService {
     }
 
     async updateEvento(id_evento, nuevosValores) {
-        /* const userId = this.getCurrentUserId();  */
-        const userId = 1
+        const userId = controller.getCurrentUserId(); 
+        /* const userId = 1 */
         const {nombre, descripcion, ubicacion, fecha, hora, duracion, imagen} = nuevosValores
         /* Evento.validarDatos(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen) */
 
@@ -123,8 +123,8 @@ class DatabaseService {
     }
 
     async deleteEvento(id_evento) {
-        /* const userId = this.getCurrentUserId();  */
-        const userId = 1
+        const userId = controller.getCurrentUserId(); 
+        /* const userId = 1 */
         await this.db.runAsync(`DELETE FROM eventos WHERE id_evento = ? AND id_usuario = ?`, id_evento, userId)  
         return true      
     }
@@ -144,8 +144,8 @@ class DatabaseService {
     }
 
     async addParticipante(id_evento) {
-        /* const userId = this.getCurrentUserId();  */
-        const userId = 1
+        const userId = controller.getCurrentUserId(); 
+        /* const userId = 1 */
         const result = await this.db.runAsync(`INSERT INTO participantes (id_evento, id_usuario)
             VALUES(?,?)`,
             id_evento, userId
@@ -154,8 +154,8 @@ class DatabaseService {
     }
 
     async deleteParticipante(id_evento) {
-        /* const userId = this.getCurrentUserId();  */
-        const userId = 1
+        const userId = controller.getCurrentUserId(); 
+        /* const userId = 1 */
         await this.db.runAsync(`DELETE FROM participantes WHERE id_evento = ? AND id_usuario = ?`,
             id_evento, userId
         )
