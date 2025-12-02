@@ -13,6 +13,7 @@ export default function Home({ navigation }) {
   const [eventos, setEventos]= useState([]);
   const [asistentesPorEvento, setAsistentesPorEvento] = useState({});
   const [misParticipaciones, setMisParticipaciones] = useState([]);
+  const [searchText, setSearchText] = useState('')
 
 
   const cargarEventos= useCallback(async()=>{
@@ -142,6 +143,10 @@ export default function Home({ navigation }) {
         </Pressable>
       </View>
 
+      <View style={styles.separarTexto}>
+          <Text style={styles.texto}>Visualiza los eventos a los que te has unido</Text>
+      </View>      
+
      
       <View style={styles.buscadorContainer}>
         <Ionicons name="search-outline" size={22} color="#000" />
@@ -149,6 +154,8 @@ export default function Home({ navigation }) {
           style={styles.buscadorInput}
           placeholder="Buscar evento"
           placeholderTextColor="#777"
+          value={searchText}
+          onChangeText={setSearchText} 
         />
       </View>
 
@@ -184,7 +191,9 @@ export default function Home({ navigation }) {
 
 
         <FlatList
-          data={eventos} /* eventos */ /* eventos.filter(ev => !misParticipaciones.includes(ev.id_evento)) */
+          data={eventos.filter(ev => 
+            ev.nombre.toLowerCase().includes(searchText.toLowerCase())
+          )} /* eventos */ /* eventos.filter(ev => !misParticipaciones.includes(ev.id_evento)) */
           keyExtractor={ev => ev.id_evento.toString()}
           renderItem={renderEvento}
           contentContainerStyle={{ paddingBottom: 80 }}
@@ -397,4 +406,13 @@ const styles = StyleSheet.create({
   zIndex:2,
   marginTop:0,
 },
+separarTexto:{
+    marginBottom:20,
+},
+    texto:{
+        fontSize:16,
+        color:'#fff',
+        margin:15,
+        fontWeight:'400',
+    },
 })

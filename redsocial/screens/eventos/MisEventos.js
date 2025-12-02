@@ -13,6 +13,7 @@ export default function MisEventos({navigation}){
     const [eventos, setEventos]= useState([]);
     const [eventosUnidos, setEventosUnidos]= useState([]);
     const [asistentesPorEvento, setAsistentesPorEvento] = useState({});
+    const [searchText, setSearchText] = useState('')
 
     const cargarEventos= useCallback(async()=>{
         try{
@@ -211,6 +212,8 @@ export default function MisEventos({navigation}){
                 style={styles.buscadorInput}
                 placeholder='Buscar Evento'
                 placeholderTextColor='#777'
+                value={searchText}
+                onChangeText={setSearchText} 
             />
             <Pressable 
                 style={styles.recargarButton}
@@ -275,9 +278,11 @@ export default function MisEventos({navigation}){
                     <ScrollView>
                         {eventosUnidos.length > 0 && (
                             <View>
-                                <Text style={styles.seccionTitulo}>Eventos Unidos</Text>
+                                <Text style={styles.seccionTitulo}>Eventos Inscritos</Text>
                                 <FlatList
-                                    data={eventosUnidos}
+                                    data={eventosUnidos.filter(ev => 
+                                        ev.nombre.toLowerCase().includes(searchText.toLowerCase())
+                                    )}
                                     keyExtractor={(item)=>item.id_evento.toString()}
                                     renderItem={renderEventoUnido}
                                     scrollEnabled={false}
@@ -289,7 +294,9 @@ export default function MisEventos({navigation}){
                             <View>
                                 <Text style={styles.seccionTitulo}>Mis Eventos Creados</Text>
                                 <FlatList
-                                    data={eventos}
+                                    data={eventos.filter(ev => 
+                                        ev.nombre.toLowerCase().includes(searchText.toLowerCase())
+                                    )}
                                     keyExtractor={(item)=>item.id_evento.toString()}
                                     renderItem={renderEvento}
                                     scrollEnabled={false}
