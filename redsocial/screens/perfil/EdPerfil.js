@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 
-export default function Perfil({navigation}) {
+export default function EdPerfil({navigation}) {
   return (
     <ScrollView>
     <ImageBackground
@@ -61,13 +61,16 @@ export default function Perfil({navigation}) {
                 <View>
                 <Text style={styles.text}>Correo Electrónico</Text>
                 <TextInput placeholder='@correo' style={styles.input} ></TextInput>
-                <Ionicons name="pencil" size={20} color="#555" style={styles.pencil}/>
+                <Ionicons name="pencil" size={20} color="#555" style={styles.pencil} />
                 </View>
                 
-              <Pressable style={styles.boton}>
+              <Pressable style={styles.boton} onPress={()=> navigation.navigate('Perfil')}>
                   <Text style={styles.bText}>GUARDAR CAMBIOS</Text>
               </Pressable>
 
+              <Pressable style={styles.cancelar} onPress={()=> navigation.navigate('Perfil')}>
+                  <Text style={styles.bText}>Cancelar</Text>
+              </Pressable>
           </View>
         </View>
 
@@ -179,5 +182,10 @@ pencil:{
   position:'absolute',
   right:15,
   top:12,
+},
+cancelar:{
+    backgroundColor:'rgba(238, 235, 235, 0)',
+    alignItems:'center',
+    marginTop:10,
 },
 });

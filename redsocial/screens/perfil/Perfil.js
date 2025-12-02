@@ -3,7 +3,7 @@ import React from 'react'
 
 
 
-export default function Perfil({navegation}) {
+export default function Perfil({navigation}) {
   return (
     <ScrollView>
     <ImageBackground
@@ -46,7 +46,7 @@ export default function Perfil({navegation}) {
               <Text style={styles.text}>Correo Electrónico</Text>
               <TextInput placeholder='@correo' style={styles.input} ></TextInput>
 
-              <Pressable style={styles.boton}>
+                <Pressable style={styles.boton} onPress={()=> navigation.navigate('EdPerfil')}>
                   <Text style={styles.bText}>EDITAR PERFIL</Text>
               </Pressable>
 
