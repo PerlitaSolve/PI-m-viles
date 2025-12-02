@@ -21,7 +21,8 @@ export default function Registro({navigation}) {
             setNombre(''); setEmail(''); setPassword(''); setTelefono(''); setGrupo('');
             navigation.navigate('Sesion');
         }catch(error){
-            Alert.alert(error.message);
+            // Alert.alert(error.message);
+            Alert.alert('Este usuario ya está registrado.');
         }
     }
     return (

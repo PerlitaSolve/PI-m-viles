@@ -1,5 +1,6 @@
 import {Usuario} from '../Models/Usuario.js';
 import DatabaseService from '../Database/databaseServices.js';
+import { Alert } from 'react-native';
 
 export class LoginController{
     constructor(){
@@ -14,6 +15,7 @@ export class LoginController{
             return usuarioBD!= null;
         }catch(error){
             return false;
+            // Alert.alert('Usuario no encontrado');
         }
     }
     async registrarUsuario(email, password, nombre_usuario, telefono, grupo){
@@ -43,9 +45,11 @@ export class LoginController{
                 const usuario= new Usuario(usuarioBD.id_usuario, usuarioBD.email, usuarioBD.password, usuarioBD.nombre_usuario, usuarioBD.telefono, usuarioBD.grupo);
                 this.notifyListeners(`¡Bienvenido de new, ${usuario.nombre_usuario}!`);
                 return usuario;
+            }else{
+                throw new Error('Contraseña incorrecta');
             }
         }catch(error){
-            throw new Error('Hubo un problema al consultar la base de datos:'+ error.message);
+            throw new Error(error.message);
         }
     }
     addListener(callback){
