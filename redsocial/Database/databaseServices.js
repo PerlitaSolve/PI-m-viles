@@ -35,6 +35,8 @@ class DatabaseService {
                 imagen TEXT,
                 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
             );
+        `);
+        await this.db.execAsync(`
             CREATE TABLE IF NOT EXISTS publicaciones(
                 id_publicacion INTEGER PRIMARY KEY AUTOINCREMENT,
                 fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -42,13 +44,15 @@ class DatabaseService {
                 id_usuario INTEGER NOT NULL,
                 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
             );
+        `);
+          await this.db.execAsync(`
             CREATE TABLE IF NOT EXISTS comentarios(
                 id_comentario INTEGER PRIMARY KEY AUTOINCREMENT,
                 contenido TEXT NOT NULL,
                 id_publicacion INTEGER NOT NULL,
                 id_usuario INTEGER NOT NULL,
                 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-                FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion) ON DELETE CASCADE,
+                FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion) ON DELETE CASCADE
             );
         `);
         await this.db.execAsync(`
