@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function EventosStack(){
     return(
         <Stack.Navigator
-            initialRouteName="CrearEvento"
+            initialRouteName="EditarEvento"
             screenOptions={{headerShown: false}}
         >
             <Stack.Screen name="MisEventos" component={MisEventos} />

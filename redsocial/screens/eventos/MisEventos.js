@@ -43,6 +43,29 @@ export default function MisEventos({navigation}){
     }, []);
 
 
+    const cancelar = async(id_evento) => {
+        Alert.alert(
+            "Cancelar Evento",
+            "¿Seguro que deseas cancelar este evento?",
+            [
+                { text: "No", style: "cancel" },
+                { 
+                    text: "Si",
+                    onPress: async () => {
+                        try {
+                            await controllerE.deleteEvento(id_evento);
+                            await cargarEventos();
+                            Alert.alert("Evento cancelado exitosamente");
+                        } catch (err) {
+                            Alert.alert("Error", err.message);
+                        }
+                    }
+                }
+            ]
+        )
+    }    
+
+
     const renderEvento=({item, index})=>(
         <View style={styles.Cuadroevento}>
             <View style={styles.Cuadrointerno}>
@@ -74,11 +97,12 @@ export default function MisEventos({navigation}){
                 </View>
                 <View style={styles.separadorbotones}>
                     <Pressable style={styles.botonVer}>
-                        <Ionicons name="eye-outline" size={22} color='white'/>
-                        <Text style={styles.textoBoton}>VER</Text>
+                        <Ionicons name="pencil-outline" size={22} color='white'/>
+                        <Text style={styles.textoBoton}>EDITAR</Text>
                     </Pressable>  
-                    <Pressable style={styles.boton}>
-                        <Text style={styles.textoBoton}>CANCELAR EVENTO</Text>
+                    <Pressable style={styles.boton} onPress={() =>cancelar(item.id_evento)}>
+                        <Ionicons name="trash-outline" size={22} color='white'/>
+                        <Text style={styles.textoBoton}>CANCELAR</Text>
                     </Pressable>                      
                 </View>
             </View>

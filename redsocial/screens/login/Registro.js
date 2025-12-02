@@ -10,6 +10,7 @@ export default function Registro({navigation}) {
     const [password, setPassword]= useState('');
     const [telefono, setTelefono]= useState('');
     const [grupo, setGrupo]= useState('');
+    const [seguridad, setSeguridad]= useState('');
     // useEffect(()=>{
     //     (async()=>{
     //         await controller.initialize();
@@ -17,9 +18,10 @@ export default function Registro({navigation}) {
     // }, []);
     const registrandoUsuario= async()=>{
         try{
-            const usuarioCreado= await controller.registrarUsuario(email,password,nombre,telefono,grupo);
+            // Guardamos la respuesta de seguridad en mayúsculas (nombre primera mascota)
+            const usuarioCreado= await controller.registrarUsuario(email,password,nombre,telefono,grupo, seguridad.toUpperCase());
             Alert.alert(`Registro compleatado, ${usuarioCreado.nombre_usuario}. Puedes Iniciar Sesión`);
-            setNombre(''); setEmail(''); setPassword(''); setTelefono(''); setGrupo('');
+            setNombre(''); setEmail(''); setPassword(''); setTelefono(''); setGrupo(''); setSeguridad('');
             navigation.navigate('Sesion');
         }catch(error){
             // Alert.alert(error.message);
@@ -76,6 +78,13 @@ export default function Registro({navigation}) {
                     placeholder='Grupo'
                     value={grupo}
                     onChangeText={setGrupo}
+                /> 
+                <Text style={styles.textoContainer}>Nombre de tu primera mascota (INGRESA EN MAYÚSCULAS)</Text>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='EJ: FIDO'
+                    value={seguridad}
+                    onChangeText={setSeguridad}
                 /> 
                 <View>
                     <Pressable style={styles.boton} onPress={registrandoUsuario}>

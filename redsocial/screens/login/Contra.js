@@ -1,8 +1,33 @@
 import { StyleSheet, Text, View, TextInput, Pressable, Image, ImageBackground, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+import { Alert } from 'react-native'
+import { controller } from '../../Controllers'
 
 
 export default function Contra({navigation}) {
+    const [email, setEmail] = useState('')
+    const [nueva, setNueva] = useState('')
+    const [confirmar, setConfirmar] = useState('')
+    const [seguridad, setSeguridad] = useState('')
+
+    const handleRecuperar = async ()=>{
+        try{
+            if(!email.trim() || !nueva || !confirmar || !seguridad){
+                Alert.alert('Completa todos los campos');
+                return;
+            }
+            if(nueva !== confirmar){
+                Alert.alert('Las contraseñas no coinciden');
+                return;
+            }
+            // La respuesta de seguridad se compara en mayúsculas
+            await controller.recuperarContrasena(email.trim(), nueva, seguridad.toUpperCase());
+            Alert.alert('Contraseña actualizada. Inicia sesión con tu nueva contraseña');
+            navigation.navigate('Login');
+        }catch(error){
+            Alert.alert(error.message || 'Error al recuperar contraseña');
+        }
+    }
   return (
     
         <ImageBackground
@@ -24,16 +49,19 @@ export default function Contra({navigation}) {
                     <View style={{padding: 10}}></View>
                     <View>
                         <Text style={styles.text}>Correo Electrónico</Text>
-                        <TextInput placeholder='@correo' style={styles.input}></TextInput>
+                        <TextInput placeholder='@correo' style={styles.input} value={email} onChangeText={setEmail}></TextInput>
                         
-                        <Text style={styles.text}>Contraseña</Text>
-                        <TextInput placeholder='Contraseña' style={styles.input} secureTextEntry={true}></TextInput>
+                        <Text style={styles.text}>Nombre de tu primera mascota (EN MAYÚSCULAS)</Text>
+                        <TextInput placeholder='EJ: DUQUE' style={styles.input} value={seguridad} onChangeText={setSeguridad}></TextInput>
+
+                        <Text style={styles.text}> Nueva Contraseña</Text>
+                        <TextInput placeholder='Contraseña' style={styles.input} secureTextEntry={true} value={nueva} onChangeText={setNueva}></TextInput>
 
                         <Text style={styles.text}>Confirmar Contraseña</Text>
-                        <TextInput placeholder='Contraseña' style={styles.input} secureTextEntry={true}></TextInput>
+                        <TextInput placeholder='Contraseña' style={styles.input} secureTextEntry={true} value={confirmar} onChangeText={setConfirmar}></TextInput>
 
-                        <Pressable style={styles.boton} onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.bText}>INICIAR SESION</Text>
+                        <Pressable style={styles.boton} onPress={handleRecuperar}>
+                            <Text style={styles.bText}>RECUPERAR CONTRASEÑA</Text>
                         </Pressable>
 
                     </View>
