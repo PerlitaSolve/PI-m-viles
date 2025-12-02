@@ -7,11 +7,11 @@ export default function EditarEvento({navigation}) {
     return (
         <ImageBackground
         style={styles.fondo}
-        source={require('../assets/Fondo4.png')}>
+        source={require('../../assets/Fondo4.png')}>
             <View style={styles.separador}>
                 <Image
                 style={styles.logo}
-                source={require('../assets/LogoPI.png')}
+                source={require('../../assets/LogoPI.png')}
 
                 />
                 <Ionicons name="person-circle-outline" size={60} color='#fff'/>
@@ -65,11 +65,11 @@ export default function EditarEvento({navigation}) {
                 </View>
             <View style={styles.contFotos}>
                 <Image
-                source={require('../assets/ImagenEventos2.jpeg')}
+                source={require('../../assets/ImagenEventos2.jpeg')}
                 style={styles.foto2}
                 />
                 <Image
-                source={require('../assets/imagenEventos1.webp')}
+                source={require('../../assets/imagenEventos1.webp')}
                 style={styles.foto1}
                 />
                                

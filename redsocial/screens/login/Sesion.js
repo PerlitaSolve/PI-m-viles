@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, ImageBackground, Pressable, TextInput, Alert } from 'react-native'
 import React, { useState } from 'react'
-import MisEventos from '../MisEventos'
+import MisEventos from '../eventos/MisEventos'
 import { LoginController } from '../../Controllers/loginCotroller';
 const controller = new LoginController();
 export default function Sesion({navigation}) {

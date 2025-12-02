@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Button} from 'react-native';
 import React, { useState } from 'react'
-import Login from './Login';
-import Sesion from './Sesion';
+import Login from './login/Login'
+import Sesion from './login/Sesion';
 
 export default function Menu(){
     const [screen, setScreen]=useState('menu');

@@ -9,11 +9,11 @@ export default function Perfil({navigation}) {
   return (
     <ScrollView>
     <ImageBackground
-      source={require('../assets/Fondo4.png')}
+      source={require('../../assets/Fondo4.png')}
       style={styles.fondo}
     >
         <View style={{position:'absolute', top:40, left:20}}>
-          <Image source={require('../assets/LogoPI.png')} 
+          <Image source={require('../../assets/LogoPI.png')} 
           style={styles.logo}              
           />
         </View>
@@ -25,7 +25,7 @@ export default function Perfil({navigation}) {
           <Text style={styles.text2}>---------------------------------------------------</Text>
 
           <View style={{alignItems:'center', justifyContent:'center', marginBottom:20, marginTop:20}}>
-            <Image source={require('../assets/Lperfil.png')}
+            <Image source={require('../../assets/Lperfil.png')}
             style={styles.foto}/>
 
             <Pressable style={styles.iconCamara}>

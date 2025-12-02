@@ -8,7 +8,7 @@ export default function MisEventos({navigation}){
 
     return (
         <ImageBackground
-        source={require('../assets/Fondo1.png')}
+        source={require('../../assets/Fondo1.png')}
         style={styles.fondo}
         >
         <View style={styles.separador}>
@@ -17,7 +17,7 @@ export default function MisEventos({navigation}){
     
              <Image
             style={styles.logo}
-            source={require('../assets/LogoPI.png')}
+            source={require('../../assets/LogoPI.png')}
             />       
 
         </View>
@@ -41,7 +41,7 @@ export default function MisEventos({navigation}){
                 <Image
                 
                 style={styles.imageneventos}
-                source={require('../assets/imagenEventos1.webp')}
+                source={require('../../assets/imagenEventos1.webp')}
                 />
 
             </View>
@@ -84,7 +84,7 @@ export default function MisEventos({navigation}){
                 <Image
                 
                 style={styles.imageneventos}
-                source={require('../assets/imagenEventos1.webp')}
+                source={require('../../assets/imagenEventos1.webp')}
                 />
 
             </View>
@@ -128,7 +128,7 @@ export default function MisEventos({navigation}){
                 <Image
                 
                 style={styles.imageneventos}
-                source={require('../assets/imagenEventos1.webp')}
+                source={require('../../assets/imagenEventos1.webp')}
                 />
 
             </View>
