@@ -28,7 +28,7 @@ export default function Sesion({navigation}) {
   return (
     <>
         {logueado?(
-            <CrearEvento/>
+            <MisEventos/>
         ):(
 
    
