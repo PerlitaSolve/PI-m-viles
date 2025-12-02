@@ -157,7 +157,7 @@ export default function Home({ navigation }) {
     
         {/* <Text style={styles.subtitulo}>Categorías populares</Text>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 15 }} nestedScrollEnabled={true}>
+        {/* <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 15 }}>
           <View style={styles.categoria}>
             <Ionicons name="musical-notes-outline" size={30} color="#fff" />
             <Text style={styles.textCategoria}>Música</Text>
@@ -250,6 +250,7 @@ export default function Home({ navigation }) {
           </Pressable>
         </View>
  */}
+      {/* </ScrollView> */}
       {/* </ScrollView> */}
 
     </ImageBackground>
