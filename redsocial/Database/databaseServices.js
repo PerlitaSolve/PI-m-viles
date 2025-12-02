@@ -163,6 +163,14 @@ class DatabaseService {
         return result[0]?.cantidad||0;
     }
 
+    async getParticipacionesUsuario() {
+        const userId = controller.getCurrentUserId(); 
+        return await this.db.getAllAsync(
+            `SELECT * FROM participantes WHERE id_usuario = ?`,
+            [userId]
+        )
+    }
+
     async addParticipante(id_evento) {
         const userId = controller.getCurrentUserId(); 
         /* const userId = 1 */

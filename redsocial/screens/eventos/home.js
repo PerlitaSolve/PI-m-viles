@@ -1,8 +1,127 @@
-import { Text, StyleSheet, View, ScrollView, Pressable, ImageBackground, Image, TextInput } from 'react-native'
-import React from 'react'
+import { Text, StyleSheet, View, ScrollView, Pressable, ImageBackground, Image, TextInput, FlatList } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
+import {EventoController} from '../../Controllers/eventoController';
+import { participanteController } from '../../Controllers/participanteController'
+import { controller } from "../../Controllers";
+
+const controllerE= new EventoController();
+const controllerP = new participanteController()
 
 export default function Home({ navigation }) {
+  const [carganding, setCarganding]= useState(true);
+  const [eventos, setEventos]= useState([]);
+  const [asistentesPorEvento, setAsistentesPorEvento] = useState({});
+  const [misParticipaciones, setMisParticipaciones] = useState([]);
+
+
+  const cargarEventos= useCallback(async()=>{
+      try{
+          setCarganding(true);
+          const eventosData= await controllerE.obtenerEventos();
+          const userId = await controller.getCurrentUserId()
+
+          const filtrados = eventosData.filter(ev => Number(ev.id_usuario) !== Number(userId))
+          setEventos(filtrados);
+          console.log(`${eventosData.length} eventos recuperados.`);
+      }catch(error){
+          Alert.alert('Error: ', error.message);
+      }finally{
+          setCarganding(false);
+      }
+  },[controllerE]);
+
+  useEffect(() => {
+      const cargarAsistentes = async () => {
+          const cantidades = {};
+          for (const ev of eventos) {
+          const total = await controllerE.getCantidadParticipantes(ev.id_evento);
+          cantidades[ev.id_evento] = total;
+          }
+          setAsistentesPorEvento(cantidades);
+      };
+
+      if (eventos.length > 0) {
+          cargarAsistentes();
+      }
+  }, [eventos]);
+  
+  const cargarMisParticipaciones = async () => {
+      const joined = await controllerP.getParticipacionesUsuario();
+      setMisParticipaciones(joined.map(j => j.id_evento));
+  }
+
+  const handleJoin = async (id_evento) => {
+    try {
+      if (misParticipaciones.includes(id_evento)) {
+        await controllerP.deleteParticipante(id_evento);
+      } else {
+        await controllerP.addParticipante(id_evento);
+      }
+
+      await cargarEventos();
+      await cargarMisParticipaciones();
+
+    } catch (err) {
+      Alert.alert("Error", err.message);
+    }
+  };
+
+  useEffect(() => {
+      cargarEventos();
+      cargarMisParticipaciones();
+  }, [])
+
+
+
+  const renderEvento = ({ item: ev }) => {
+    return (
+      <View style={styles.eventCard}>
+        
+        <Image
+          style={styles.eventImage}
+          source={{ uri: ev.imagen }}
+        />
+
+        <Text style={styles.eventTitle}>{ev.nombre}</Text>
+        <Text style={styles.eventDesc}>{ev.descripcion}</Text>
+
+        <View style={styles.infoRow}>
+          <Ionicons name="calendar-outline" size={22} color="#333" />
+          <Text style={styles.infoText}>{ev.fecha} - {ev.hora}</Text>
+        </View>
+
+        <View style={styles.infoRow}>
+          <Ionicons name="location-outline" size={22} color="#333" />
+          <Text style={styles.infoText}>{ev.ubicacion}</Text>
+        </View>
+
+        <View style={styles.separadoricons}>
+          <Ionicons name="people-outline" size={25} color="#3d3d3dff" />
+          <Text style={styles.textoicons}>
+            {asistentesPorEvento[ev.id_evento] ?? 0} asistentes
+          </Text>
+        </View>
+
+        <Pressable
+          style={styles.botonUnirse}
+          onPress={() => handleJoin(ev.id_evento)}
+        >
+          <Text style={styles.textBoton}>
+            {misParticipaciones.includes(ev.id_evento) ? "SALIR" : "UNIRME"}
+          </Text>
+        </Pressable>
+
+      </View>
+    )
+  }
+
+
+
+
+
+
+
 
   return (
     <ImageBackground
@@ -28,7 +147,7 @@ export default function Home({ navigation }) {
         />
       </View>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 80 }} nestedScrollEnabled={true}>
 
     
         <Text style={styles.subtitulo}>Categorías populares</Text>
@@ -58,7 +177,22 @@ export default function Home({ navigation }) {
    
         <Text style={styles.subtitulo}>Eventos recomendados</Text>
 
-        <View style={styles.eventCard}>
+
+        <FlatList
+          data={eventos} /* eventos */ /* eventos.filter(ev => !misParticipaciones.includes(ev.id_evento)) */
+          keyExtractor={ev => ev.id_evento.toString()}
+          renderItem={renderEvento}
+          contentContainerStyle={{ paddingBottom: 80 }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <Text style={[styles.textCategoria, {textAlign: 'center', marginTop: 80}]}>
+              No hay eventos disponibles
+            </Text>
+          }
+        />
+
+
+        {/* <View style={styles.eventCard}>
           <Image
             style={styles.eventImage}
             source={require('../../assets/imagenEventos1.webp')}
@@ -75,6 +209,11 @@ export default function Home({ navigation }) {
             <Ionicons name="location-outline" size={22} color="#333" />
             <Text style={styles.infoText}>Colonia Centro</Text>
           </View>
+
+          <View style={styles.separadoricons}> 
+              <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
+              <Text style={styles.textoicons}>14 asistentes</Text>
+          </View >  
 
           <Pressable style={styles.botonUnirse}>
             <Text style={styles.textBoton}>UNIRME</Text>
@@ -104,7 +243,7 @@ export default function Home({ navigation }) {
             <Text style={styles.textBoton}>UNIRME</Text>
           </Pressable>
         </View>
-
+ */}
       </ScrollView>
 
     </ImageBackground>
@@ -232,5 +371,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#fff",
     fontWeight: "700",
+  },
+  separadoricons:{
+      flexDirection:'row',
+      justifyContent:'start',
+      alignItems:'center',
+      gap:5,
+      marginTop:10, 
+      marginLeft:15,      
+  },
+  textoicons:{
+      fontSize:15,
+      color:'#3a3a3aff',
   },
 })

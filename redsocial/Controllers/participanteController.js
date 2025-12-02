@@ -24,6 +24,15 @@ export class participanteController {
         }
     }
 
+    async getParticipacionesUsuario() {
+        const data = await databaseServices.getParticipacionesUsuario();
+        return data.map(e => new evento_Participantes(
+            e.id_evento_participante,
+            e.id_evento,
+            e.id_usuario
+        ));
+    }    
+
     async addParticipante(id_evento) {
         try {
             const nuevo = await databaseServices.addParticipante(id_evento)
