@@ -18,7 +18,12 @@ export default function Login({navigation}) {
             </View>
 
             <View style={styles.container2}>
-                <Pressable style={styles.boton1} onPress={()=>navigation.navigate('Sesion')}><Text style={styles.textButton}>INICIAR SESIÓN</Text></Pressable>
+                <Pressable style={styles.boton1} onPress={()=>navigation.navigate('Sesion')}
+                
+                >
+                    <Text style={styles.textButton}>INICIAR SESIÓN</Text>
+                </Pressable>
+
                 <Pressable style={styles.boton} onPress={()=> navigation.navigate('Registro')}><Text  style={styles.textButton}>REGISTRARSE</Text></Pressable>
                 <Pressable onPress={() => navigation.navigate('Recuperar')} style={{marginTop:12}}>
                     <Text style={{color:'#fff', textDecorationLine:'underline'}}>¿Olvidaste tu contraseña?</Text>
@@ -69,9 +74,9 @@ const styles = StyleSheet.create({
         paddingVertical:15,
         paddingHorizontal:50,
         borderRadius:30,
-        color:'#fff',
         fontSize:14,
         fontFamily:"Instrument Sans",
+        marginBottom:30,
     },
     boton:{
         paddingVertical:15,

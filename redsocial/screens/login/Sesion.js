@@ -41,18 +41,19 @@ export default function Sesion({navigation}) {
                         <View style={styles.cuadro}>
                             <Text style={styles.titulo}>INICIAR SESIÓN</Text>
                             <Text style={styles.text}>Correo Electrónico</Text>
-                            <TextInput placeholder='Ejemplo@' style={styles.input}
+                            <TextInput placeholder='123456789@correo.com' style={styles.input}
                                 value={email}
                                 onChangeText={setEmail}
                             />
                             
                             <Text style={styles.text}>Contraseña</Text>
-                            <TextInput placeholder='Ejemplo@' style={styles.input} secureTextEntry={true}
+                            <TextInput placeholder='******' style={styles.input} secureTextEntry={true}
                                 value={pwd}
                                 onChangeText={setPwd}
                             />
                             <Pressable style={styles.boton1} onPress={()=>navigation.navigate('Recuperar')}>
-                                <Text style={styles.buttonText}>¿Olvidaste tu contraseña?</Text></Pressable>
+                                <Text style={styles.buttonText}>¿Olvidaste tu contraseña?</Text>
+                            </Pressable>
                             <Pressable style={styles.boton} onPress={loguear}>
                                 <Text style={styles.iniciarSesionText}>INICIAR SESIÓN</Text>
                             </Pressable>
@@ -103,7 +104,8 @@ const styles = StyleSheet.create({
     boton:{
         backgroundColor:'#80A0EB',
         borderRadius:10,
-        marginTop:20,
+        marginTop:15,
+        marginBottom:15,
         textAlign:'center',
         width:200,
         height:45,
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
         fontFamily:"Instrument Sans",
         width: '100%',
         alignItems:'flex-end',
+        textDecorationLine:'underline',
     },
     cuadro:{
         backgroundColor:'#ffffffc7',
@@ -128,6 +131,8 @@ const styles = StyleSheet.create({
         borderRadius:10,
         width:300,
         alignItems:'center',
+        marginBottom:200,
+        elevation:12,
     },
     titulo:{
         fontSize:24,
@@ -139,12 +144,14 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor:'#9f9f9fff',
         backgroundColor:'#d4d4d4ff',
-        borderRadius:10,
-        padding:10,
+        borderRadius:15,
+        width:230,
+        padding:8,
         marginBottom:15,
         fontFamily:"Instrument Sans",
-        paddingVertical:8,
-        paddingHorizontal:40,
+        elevation:12,
+       // paddingVertical:8,
+        //paddingHorizontal:40,
     },
     text:{
         fontSize:16,
