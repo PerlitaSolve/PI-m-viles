@@ -28,7 +28,7 @@ class DatabaseService {
     //Reutiliza esto si lo necesitas Bv
     async obtenerUsuarioPorEmail(email) {
         const result = await this.db.getFirstAsync(
-            `SELECT * FROM usuarios WHERE email = ?;`,
+            `SELECT * FROM usuarios WHERE email = ?`,
             [email]
         );
         if (result) {
