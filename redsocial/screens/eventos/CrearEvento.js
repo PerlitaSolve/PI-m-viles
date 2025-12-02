@@ -35,21 +35,21 @@ export default function CrearEvento({navigation}) {
     style={styles.fondo}
     source={require('../../assets/Fondo2.png')}>
 
-      <View style={styles.separador}>
-          <Image
-          style={styles.logo}
-          source={require('../../assets/LogoPI.png')}
-          />
-          <Pressable
-            onPress={() => navigation.navigate('PerfilStack', { screen: 'Perfil' })}
-          >
+        <View style={styles.header}>
+            <Image
+            style={styles.logo}
+            source={require('../../assets/LogoPI.png')}
+            />
+            
+            <Text style={styles.tituloHome}>MIS EVENTOS</Text>
+
+            <Pressable onPress={() => navigation.navigate('PerfilStack', { screen: 'Perfil' })} >
             <Ionicons name="person-circle-outline" size={60} color="#fff" />
-          </Pressable>
-      </View>
+            </Pressable>     
+        </View>
 
       <View>
-        <Text style={styles.texto}>AÑADE TU EVENTO AL FEED</Text>
-        <Text style={styles.texto2}>LLena todos los campos para añadir tu evento</Text>
+        <Text style={styles.texto2}>Llena todos los campos para añadir tu evento</Text>
       </View>
 
       <View style={styles.cuadro}>
@@ -200,4 +200,16 @@ input2:{
   marginTop:10,
   fontSize: 14,
 },
+  tituloHome: {
+    fontSize: 26,
+    color: "#fff",
+    fontWeight: "700",
+  },
+    header: {
+    flexDirection: "row",
+    width: "90%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 40,
+  },
 })

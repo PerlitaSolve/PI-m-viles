@@ -130,11 +130,16 @@ export default function Home({ navigation }) {
     >
 
       <View style={styles.header}>
-        <Ionicons name="menu-outline" size={45} color="white" />
+          <Image
+          style={styles.logo}
+          source={require('../../assets/LogoPI.png')}
+          />
         
         <Text style={styles.tituloHome}>HOME</Text>
 
-        <Ionicons name="notifications-outline" size={45} color="white" />
+        <Pressable onPress={() => navigation.navigate('PerfilStack', { screen: 'Perfil' })} >
+          <Ionicons name="person-circle-outline" size={60} color="#fff" />
+        </Pressable>
       </View>
 
      
@@ -142,17 +147,17 @@ export default function Home({ navigation }) {
         <Ionicons name="search-outline" size={22} color="#000" />
         <TextInput
           style={styles.buscadorInput}
-          placeholder="Buscar evento o categoría"
+          placeholder="Buscar evento"
           placeholderTextColor="#777"
         />
       </View>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 80 }} nestedScrollEnabled={true}>
+      {/* <ScrollView contentContainerStyle={{ paddingBottom: 80 }} nestedScrollEnabled={true}> */}
 
     
-        <Text style={styles.subtitulo}>Categorías populares</Text>
+        {/* <Text style={styles.subtitulo}>Categorías populares</Text>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 15 }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ paddingHorizontal: 15 }} nestedScrollEnabled={true}>
           <View style={styles.categoria}>
             <Ionicons name="musical-notes-outline" size={30} color="#fff" />
             <Text style={styles.textCategoria}>Música</Text>
@@ -172,7 +177,7 @@ export default function Home({ navigation }) {
             <Ionicons name="restaurant-outline" size={30} color="#fff" />
             <Text style={styles.textCategoria}>Gastronomía</Text>
           </View>
-        </ScrollView>
+        </ScrollView> */}
 
    
         <Text style={styles.subtitulo}>Eventos recomendados</Text>
@@ -184,6 +189,7 @@ export default function Home({ navigation }) {
           renderItem={renderEvento}
           contentContainerStyle={{ paddingBottom: 80 }}
           showsVerticalScrollIndicator={false}
+          style={{ width: '100%' }}
           ListEmptyComponent={
             <Text style={[styles.textCategoria, {textAlign: 'center', marginTop: 80}]}>
               No hay eventos disponibles
@@ -244,7 +250,7 @@ export default function Home({ navigation }) {
           </Pressable>
         </View>
  */}
-      </ScrollView>
+      {/* </ScrollView> */}
 
     </ImageBackground>
   )
@@ -384,4 +390,10 @@ const styles = StyleSheet.create({
       fontSize:15,
       color:'#3a3a3aff',
   },
+  logo:{
+  height:70,
+  width:70,
+  zIndex:2,
+  marginTop:0,
+},
 })

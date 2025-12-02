@@ -111,83 +111,75 @@ export default function MisEventos({navigation}){
 
 
     const renderEventoUnido=({item, index})=>(
-        <View style={styles.Cuadroevento}>
-            <View style={styles.Cuadrointerno}>
-                <View style={styles.SupPart}>
-                    <Image
-                        style={styles.imageneventos}
-                        //source={require('../../assets/imagenEventos1.webp')}
-                        source={{uri: item.imagen}}
-                    />
-                </View>
-                <View style={styles.SupMed}>
-                    <View>
-                        {/* //id_evento, id_usuario, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen */}
-                        <Text style={styles.textoInternotitulo}>{item.nombre}</Text>
-                        <Text style={styles.textoInterno}>{item.descripcion}</Text>
-                    </View>
-                    <View style={styles.separadoricons}>
-                        <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
-                        <Text style={styles.textoicons}>{item.fecha} - {item.hora}</Text>
-                    </View>
-                    <View style={styles.separadoricons}>
-                        <Ionicons name="location-outline" size={25} color='#3d3d3dff'/>
-                        <Text style={styles.textoicons}>{item.ubicacion}</Text>
-                    </View>  
-                    <View style={styles.separadoricons}> 
-                        <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
-                        <Text style={styles.textoicons}>{asistentesPorEvento[item.id_evento]||0} asistentes</Text>
-                    </View >                             
-                </View>
-                <View style={styles.separadorbotones}> 
-                    <Pressable style={styles.boton} onPress={() => salirDelEvento(item.id_evento)}>
-                        <Ionicons name="exit-outline" size={22} color='white'/>
-                        <Text style={styles.textoBoton}>SALIR</Text>
-                    </Pressable>                      
-                </View>
+        <View style={styles.eventCard}>
+            <Image
+                style={styles.eventImage}
+                source={{uri: item.imagen}}
+            />
+
+            <Text style={styles.eventTitle}>{item.nombre}</Text>
+            <Text style={styles.eventDesc}>{item.descripcion}</Text>
+
+            <View style={styles.infoRow}>
+                <Ionicons name="calendar-outline" size={22} color="#333" />
+                <Text style={styles.infoText}>{item.fecha} - {item.hora}</Text>
             </View>
+
+            <View style={styles.infoRow}>
+                <Ionicons name="location-outline" size={22} color="#333" />
+                <Text style={styles.infoText}>{item.ubicacion}</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+                <Ionicons name="people-outline" size={22} color="#333" />
+                <Text style={styles.infoText}>
+                    {asistentesPorEvento[item.id_evento]||0} asistentes
+                </Text>
+            </View>
+
+            <Pressable style={styles.botonUnirse} onPress={() => salirDelEvento(item.id_evento)}>
+                {/* <Ionicons name="exit-outline" size={22} color='white'/> */}
+                <Text style={styles.textBoton}>SALIR</Text>
+            </Pressable>
         </View>
     )
 
     const renderEvento=({item, index})=>(
-        <View style={styles.Cuadroevento}>
-            <View style={styles.Cuadrointerno}>
-                <View style={styles.SupPart}>
-                    <Image
-                        style={styles.imageneventos}
-                        //source={require('../../assets/imagenEventos1.webp')}
-                        source={{uri: item.imagen}}
-                    />
-                </View>
-                <View style={styles.SupMed}>
-                    <View>
-                        {/* //id_evento, id_usuario, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen */}
-                        <Text style={styles.textoInternotitulo}>{item.nombre}</Text>
-                        <Text style={styles.textoInterno}>{item.descripcion}</Text>
-                    </View>
-                    <View style={styles.separadoricons}>
-                        <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
-                        <Text style={styles.textoicons}>{item.fecha} - {item.hora}</Text>
-                    </View>
-                    <View style={styles.separadoricons}>
-                        <Ionicons name="location-outline" size={25} color='#3d3d3dff'/>
-                        <Text style={styles.textoicons}>{item.ubicacion}</Text>
-                    </View>  
-                    <View style={styles.separadoricons}> 
-                        <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
-                        <Text style={styles.textoicons}>{asistentesPorEvento[item.id_evento]||0} asistentes</Text>
-                    </View >                             
-                </View>
-                <View style={styles.separadorbotones}>
-                    <Pressable style={styles.botonVer} onPress={() => navigation.navigate('EditarEvento', { evento: item })}>
-                        <Ionicons name="pencil-outline" size={22} color='white' />
-                        <Text style={styles.textoBoton}>EDITAR</Text>
-                    </Pressable>  
-                    <Pressable style={styles.boton} onPress={() =>cancelar(item.id_evento)}>
-                        <Ionicons name="trash-outline" size={22} color='white'/>
-                        <Text style={styles.textoBoton}>CANCELAR</Text>
-                    </Pressable>                      
-                </View>
+        <View style={styles.eventCard}>
+            <Image
+                style={styles.eventImage}
+                source={{uri: item.imagen}}
+            />
+
+            <Text style={styles.eventTitle}>{item.nombre}</Text>
+            <Text style={styles.eventDesc}>{item.descripcion}</Text>
+
+            <View style={styles.infoRow}>
+                <Ionicons name="calendar-outline" size={22} color="#333" />
+                <Text style={styles.infoText}>{item.fecha} - {item.hora}</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+                <Ionicons name="location-outline" size={22} color="#333" />
+                <Text style={styles.infoText}>{item.ubicacion}</Text>
+            </View>
+
+            <View style={styles.infoRow}>
+                <Ionicons name="people-outline" size={22} color="#333" />
+                <Text style={styles.infoText}>
+                    {asistentesPorEvento[item.id_evento]||0} asistentes
+                </Text>
+            </View>
+
+            <View style={styles.separadorbotones}>
+                <Pressable style={styles.botonVer} onPress={() => navigation.navigate('EditarEvento', { evento: item })}>
+                    <Ionicons name="pencil-outline" size={22} color='white' />
+                    <Text style={styles.textoBoton}>EDITAR</Text>
+                </Pressable>  
+                <Pressable style={styles.botonVer2} onPress={() =>cancelar(item.id_evento)}>
+                    <Ionicons name="trash-outline" size={22} color='white'/>
+                    <Text style={styles.textoBoton}>CANCELAR</Text>
+                </Pressable>                      
             </View>
         </View>
     )
@@ -196,14 +188,19 @@ export default function MisEventos({navigation}){
         source={require('../../assets/Fondo1.png')}
         style={styles.fondo}
         >
-        <View style={styles.separador}>
-            <Ionicons name="person-circle-outline" size ={60} color='white'/>  
+        <View style={styles.header}>
             <Image
-                style={styles.logo}
-                source={require('../../assets/LogoPI.png')}
-            />       
+            style={styles.logo}
+            source={require('../../assets/LogoPI.png')}
+            />
+            
+            <Text style={styles.tituloHome}>MIS EVENTOS</Text>
+
+            <Pressable onPress={() => navigation.navigate('PerfilStack', { screen: 'Perfil' })} >
+            <Ionicons name="person-circle-outline" size={60} color="#fff" />
+            </Pressable>     
         </View>
-        <Text style={styles.textotitulo}>MIS EVENTOS</Text>   
+
         <View style={styles.separarTexto}>
             <Text style={styles.texto}>Visualiza los eventos a los que te has unido</Text>
         </View>
@@ -405,7 +402,7 @@ const styles = StyleSheet.create({
     seccionTitulo:{
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#3d3d3dff',
+        color: 'white',
         marginLeft: 20,
         marginTop: 15,
         marginBottom: 10,
@@ -413,9 +410,9 @@ const styles = StyleSheet.create({
     cuadrodeEventos:{
         marginTop: 28,
         borderRadius: 15,
-        width: '85%',
+        width: '100%',
         height: '70%',
-        backgroundColor: 'white',
+        /* backgroundColor: 'white', */
         borderRadius: 20,
         // alignItems:'center',
         // justifyContent: 'center',
@@ -471,11 +468,9 @@ const styles = StyleSheet.create({
         marginLeft:15,      
     },
     separador:{
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        gap:200,
-        marginTop:10,
+    flexDirection:'row',
+    gap:210,
+    marginTop:15,
     },
     textotitulo:{
         fontSize:22,
@@ -547,6 +542,24 @@ textoBoton:{
     flexDirection:'row',
     gap:5,
     backgroundColor:'#aeaeaeff',
+    paddingVertical:10,
+    width:130,
+    margin:15,
+    borderRadius:20,
+    elevation:5,
+    shadowColor:'#00000056',
+    shadowOffset:{
+        width:0,
+        height:3,
+    },
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:20,        
+    },
+    botonVer2:{
+    flexDirection:'row',
+    gap:5,
+    backgroundColor:'#a93d3dff',
     paddingVertical:10,
     width:130,
     margin:15,
@@ -639,5 +652,67 @@ buscadorInput:{
 },
 separarTexto:{
     marginBottom:20,
-}
+},
+  tituloHome: {
+    fontSize: 26,
+    color: "#fff",
+    fontWeight: "700",
+  },
+    header: {
+    flexDirection: "row",
+    width: "90%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 40,
+  },
+  eventCard: {
+    width: "90%",
+    backgroundColor: "#fff",
+    alignSelf: "center",
+    borderRadius: 20,
+    marginTop: 20,
+    paddingBottom: 20,
+    overflow: "hidden",
+  },
+  eventImage: {
+    width: "100%",
+    height: 200,
+  },
+  eventTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginTop: 10,
+    marginLeft: 10,
+    color: "#333",
+  },
+  eventDesc: {
+    fontSize: 14,
+    marginLeft: 10,
+    marginBottom: 5,
+    color: "#555",
+  },
+  infoRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    marginLeft: 10,
+    marginTop: 5,
+  },
+  infoText: {
+    fontSize: 15,
+    color: "#333",
+  },
+  botonUnirse: {
+    backgroundColor: "#0099b0ff",
+    marginTop: 15,
+    width: 120,
+    paddingVertical: 10,
+    borderRadius: 20,
+    alignSelf: "center",
+  },
+    textBoton: {
+    textAlign: "center",
+    color: "#fff",
+    fontWeight: "700",
+  },
 })

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, Pressable, ScrollView } from 'react-native'
 import React, {useState,useEffect} from 'react';
 import { loginController, LoginController } from '../../Controllers/loginCotroller';
+import { controller } from '../../Controllers';
 
 export default function Perfil({navigation}) {
   const [userData, setUserData] = useState({
@@ -11,7 +12,7 @@ export default function Perfil({navigation}) {
   });
 
   const loadUserData = async()=>{
-    const user = loginController.getCurrentUser();
+    const user = controller.getCurrentUser();
     if(user){
       setUserData({
         nombre_usuario: user.nombre_usuario,
