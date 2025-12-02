@@ -3,40 +3,62 @@ import React, { useCallback, useState, useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 
 import {EventoController} from '../../Controllers/eventoController';
+import {participanteController} from '../../Controllers/participanteController';
+import { controller } from "../../Controllers"; /* user id se saca con controller.getCurrentUserId() */
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 const controllerE= new EventoController();
+const controllerP= new participanteController();
 export default function MisEventos({navigation}){
     const [carganding, setCarganding]= useState(true);
     const [eventos, setEventos]= useState([]);
+    const [eventosUnidos, setEventosUnidos]= useState([]);
     const [asistentesPorEvento, setAsistentesPorEvento] = useState({});
 
     const cargarEventos= useCallback(async()=>{
         try{
             setCarganding(true);
+            
+            // Cargar eventos creados por el usuario
             const eventosData= await controllerE.obtenerEventosUsuario();
             setEventos(eventosData);
             console.log(`${eventosData.length} eventos recuperados.`);
+            
+            // Cargar eventos a los que el usuario se ha unido
+            const participaciones = await controllerP.getParticipacionesUsuario();
+            const todosLosEventos = await controllerE.obtenerEventos();
+            const userId = controller.getCurrentUserId();
+            
+            // Filtrar eventos donde el usuario es participante pero no creador
+            const eventosUnidosData = todosLosEventos.filter(evento => {
+                const esParticipante = participaciones.some(p => p.id_evento === evento.id_evento);
+                const esCreador = evento.id_usuario === userId;
+                return esParticipante && !esCreador;
+            });
+            
+            setEventosUnidos(eventosUnidosData);
+            console.log(`${eventosUnidosData.length} eventos unidos recuperados.`);
         }catch(error){
             Alert.alert('Error: ', error.message);
         }finally{
             setCarganding(false);
         }
-    },[controllerE]);
+    },[controllerE]); /* asdkfs */
 
     useEffect(() => {
         const cargarAsistentes = async () => {
             const cantidades = {};
-            for (const ev of eventos) {
-            const total = await controllerE.getCantidadParticipantes(ev.id_evento);
-            cantidades[ev.id_evento] = total;
+            const todosEventos = [...eventosUnidos, ...eventos];
+            for (const ev of todosEventos) {
+                const total = await controllerE.getCantidadParticipantes(ev.id_evento);
+                cantidades[ev.id_evento] = total;
             }
             setAsistentesPorEvento(cantidades);
         };
 
-        if (eventos.length > 0) {
+        if (eventosUnidos.length > 0 || eventos.length > 0) {
             cargarAsistentes();
         }
-    }, [eventos]);
+    }, [eventosUnidos, eventos]);
 
     useEffect(() => {
         cargarEventos();
@@ -65,6 +87,67 @@ export default function MisEventos({navigation}){
         )
     }    
 
+    const salirDelEvento = async(id_evento) => {
+        Alert.alert(
+            "Salir del Evento",
+            "¿Seguro que deseas salir de este evento?",
+            [
+                { text: "No", style: "cancel" },
+                { 
+                    text: "Si",
+                    onPress: async () => {
+                        try {
+                            await controllerP.deleteParticipante(id_evento);
+                            await cargarEventos();
+                            Alert.alert("Has salido del evento exitosamente");
+                        } catch (err) {
+                            Alert.alert("Error", err.message);
+                        }
+                    }
+                }
+            ]
+        )
+    }
+
+
+    const renderEventoUnido=({item, index})=>(
+        <View style={styles.Cuadroevento}>
+            <View style={styles.Cuadrointerno}>
+                <View style={styles.SupPart}>
+                    <Image
+                        style={styles.imageneventos}
+                        //source={require('../../assets/imagenEventos1.webp')}
+                        source={{uri: item.imagen}}
+                    />
+                </View>
+                <View style={styles.SupMed}>
+                    <View>
+                        {/* //id_evento, id_usuario, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen */}
+                        <Text style={styles.textoInternotitulo}>{item.nombre}</Text>
+                        <Text style={styles.textoInterno}>{item.descripcion}</Text>
+                    </View>
+                    <View style={styles.separadoricons}>
+                        <Ionicons name="calendar-outline" size={25} color='#3d3d3dff'/>
+                        <Text style={styles.textoicons}>{item.fecha} - {item.hora}</Text>
+                    </View>
+                    <View style={styles.separadoricons}>
+                        <Ionicons name="location-outline" size={25} color='#3d3d3dff'/>
+                        <Text style={styles.textoicons}>{item.ubicacion}</Text>
+                    </View>  
+                    <View style={styles.separadoricons}> 
+                        <Ionicons name="people-outline" size={25} color='#3d3d3dff'/>
+                        <Text style={styles.textoicons}>{asistentesPorEvento[item.id_evento]||0} asistentes</Text>
+                    </View >                             
+                </View>
+                <View style={styles.separadorbotones}> 
+                    <Pressable style={styles.boton} onPress={() => salirDelEvento(item.id_evento)}>
+                        <Ionicons name="exit-outline" size={22} color='white'/>
+                        <Text style={styles.textoBoton}>SALIR</Text>
+                    </Pressable>                      
+                </View>
+            </View>
+        </View>
+    )
 
     const renderEvento=({item, index})=>(
         <View style={styles.Cuadroevento}>
@@ -192,18 +275,37 @@ export default function MisEventos({navigation}){
                 </View>
             ):(
                 <View style={styles.cuadrodeEventos}>
-                    <FlatList
-                        data={eventos}
-                        keyExtractor={(item)=>item.id_evento.toString()}
-                        renderItem={renderEvento}
-                        ListEmptyComponent={
+                    <ScrollView>
+                        {eventosUnidos.length > 0 && (
+                            <View>
+                                <Text style={styles.seccionTitulo}>Eventos Unidos</Text>
+                                <FlatList
+                                    data={eventosUnidos}
+                                    keyExtractor={(item)=>item.id_evento.toString()}
+                                    renderItem={renderEventoUnido}
+                                    scrollEnabled={false}
+                                />
+                            </View>
+                        )}
+                        
+                        {eventos.length > 0 && (
+                            <View>
+                                <Text style={styles.seccionTitulo}>Mis Eventos Creados</Text>
+                                <FlatList
+                                    data={eventos}
+                                    keyExtractor={(item)=>item.id_evento.toString()}
+                                    renderItem={renderEvento}
+                                    scrollEnabled={false}
+                                />
+                            </View>
+                        )}
+                        
+                        {eventosUnidos.length === 0 && eventos.length === 0 && (
                             <View style={styles.emptyContainer}>
                                 <Text style={styles.emptyText}>No hay eventos</Text>
                             </View>
-                        }
-                        contentContainerStyle={eventos.length===0&& styles.emptyList}
-                        
-                    />
+                        )}
+                    </ScrollView>
                 </View>
             )}
 
@@ -300,6 +402,14 @@ export default function MisEventos({navigation}){
 }
 
 const styles = StyleSheet.create({
+    seccionTitulo:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#3d3d3dff',
+        marginLeft: 20,
+        marginTop: 15,
+        marginBottom: 10,
+    },
     cuadrodeEventos:{
         marginTop: 28,
         borderRadius: 15,
