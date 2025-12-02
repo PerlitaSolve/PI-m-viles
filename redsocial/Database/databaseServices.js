@@ -17,6 +17,8 @@ class DatabaseService {
                 telefono TEXT,
                 grupo TEXT NOT NULL
             );
+        `);
+         await this.db.execAsync(`
             CREATE TABLE IF NOT EXISTS eventos(
                 id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
                 id_usuario INTEGER NOT NULL,
@@ -42,7 +44,8 @@ class DatabaseService {
                 id_publicacion INTEGER NOT NULL,
                 id_usuario INTEGER NOT NULL,
                 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-                FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion) ON DELETE CASCADE
+                FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion) ON DELETE CASCADE,
+                imagen TEXT
             );
         `);
     }

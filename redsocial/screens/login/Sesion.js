@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, ImageBackground, Pressable, TextInput, Alert } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MisEventos from '../eventos/MisEventos'
 import { LoginController } from '../../Controllers/loginCotroller';
 const controller = new LoginController();
@@ -7,7 +7,11 @@ export default function Sesion({navigation}) {
     const [logueado, setLogueado] = useState(false);
     const [email, setEmail]= useState('');
     const [pwd, setPwd]= useState('');
-
+    useEffect(()=>{
+        (async()=>{
+            await controller.initialize();
+        })();
+    }, []);
     const loguear= async()=>{
         try{
             const usuarioALoguear= await controller.iniciarSesion(email, pwd);
