@@ -63,16 +63,16 @@ export default function Perfil({navigation}) {
         <View style={styles.cuadro}>
           <View>
               <Text style={styles.text}>Nombre</Text>
-              <TextInput placeholder='Nombre Completo' style={styles.input}></TextInput>
+              <TextInput placeholder={userData.nombre_usuario} style={styles.input}></TextInput>
               
               <Text style={styles.text}>Grupo</Text>
-              <TextInput placeholder='Grupo' style={styles.input}></TextInput>
+              <TextInput placeholder={userData.grupo} style={styles.input}></TextInput>
 
               <Text style={styles.text}>Telefono</Text>
-              <TextInput placeholder='Telefono' style={styles.input} keyboardType='numeric'></TextInput>
+              <TextInput placeholder={userData.telefono} style={styles.input} keyboardType='numeric'></TextInput>
 
               <Text style={styles.text}>Correo Electrónico</Text>
-              <TextInput placeholder='@correo' style={styles.input} ></TextInput>
+              <TextInput placeholder={userData.email} style={styles.input} ></TextInput>
 
                 <Pressable style={styles.boton} onPress={()=> navigation.navigate('EdPerfil')}>
                   <Text style={styles.bText}>EDITAR PERFIL</Text>
