@@ -4,6 +4,8 @@ import MisEventos from './MisEventos';
 const Stack= createStackNavigator();
 export default function EventosStack(){
     return(
-        <Stack.Navigator initialRouteName="MisEventos"></Stack.Navigator>
+        <Stack.Navigator initialRouteName="MisEventos" screenOptions={{headerShown:false}}>
+            
+        </Stack.Navigator>
     )
 }
