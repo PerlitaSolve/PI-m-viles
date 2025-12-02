@@ -1,10 +1,11 @@
 import {Usuario} from '../Models/Usuario.js';
 import DatabaseService from '../Database/databaseServices.js';
 import { Alert } from 'react-native';
-
+// import { controller } from './index.js';
 export class LoginController{
     constructor(){
         this.listeners=[];
+        this.currentUser=null;
     }
     async initialize(){
         await DatabaseService.initialize();
@@ -43,6 +44,7 @@ export class LoginController{
             const usuarioBD= await DatabaseService.obtenerUsuarioPorEmail(email);
             if(usuarioBD.password=== password){
                 const usuario= new Usuario(usuarioBD.id_usuario, usuarioBD.email, usuarioBD.password, usuarioBD.nombre_usuario, usuarioBD.telefono, usuarioBD.grupo);
+                this.currentUser= usuario;
                 this.notifyListeners(`¡Bienvenido de new, ${usuario.nombre_usuario}!`);
                 return usuario;
             }else{

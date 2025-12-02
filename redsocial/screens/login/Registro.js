@@ -1,19 +1,20 @@
 import { Text, StyleSheet, View,Image,ImageBackground,TextInput,Pressable, Alert} from 'react-native'
 import React, { Component } from 'react';
 import { useState, useEffect} from 'react';
-import { LoginController } from '../../Controllers/loginCotroller';
-const controller = new LoginController();
+// import { LoginController } from '../../Controllers/loginCotroller';
+// const controller = new LoginController();
+import { controller } from '../../Controllers';
 export default function Registro({navigation}) {
     const [nombre, setNombre]= useState('');
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     const [telefono, setTelefono]= useState('');
     const [grupo, setGrupo]= useState('');
-    useEffect(()=>{
-        (async()=>{
-            await controller.initialize();
-        })();
-    }, []);
+    // useEffect(()=>{
+    //     (async()=>{
+    //         await controller.initialize();
+    //     })();
+    // }, []);
     const registrandoUsuario= async()=>{
         try{
             const usuarioCreado= await controller.registrarUsuario(email,password,nombre,telefono,grupo);

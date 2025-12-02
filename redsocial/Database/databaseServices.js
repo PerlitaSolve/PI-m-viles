@@ -1,7 +1,7 @@
 import * as SQLite from 'expo-sqlite';
 /* import { Evento } from '../Models/Evento'; */
 
-
+import { controller } from '../Controllers';
 
 class DatabaseService {
     constructor() {
