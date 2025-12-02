@@ -8,17 +8,18 @@ class DatabaseService {
         //Si ocupas limpiar tu tabla de usuarios, descomentas esta linwa
         // await this.db.execAsync(`DROP TABLE IF EXISTS usuarios`);
         await this.db.execAsync(`
+            PRAGMA foreign_keys = ON;
             CREATE TABLE IF NOT EXISTS usuarios(
                 id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
                 email TEXT UNIQUE,
                 password TEXT,
-                nombre_usuario TEXT,
+                nombre_usuario TEXT NOT NULL,
                 telefono TEXT,
-                grupo TEXT
+                grupo TEXT NOT NULL
             );
             CREATE TABLE IF NOT EXISTS eventos(
                 id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
-                id_usuario INTEGER,
+                id_usuario INTEGER NOT NULL,
                 nombre TEXT,
                 descripcion TEXT,
                 ubicacion TEXT,
@@ -26,6 +27,22 @@ class DatabaseService {
                 hora TEXT,
                 duracion TEXT,
                 imagen TEXT,
+                FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+            );
+            CREATE TABLE IF NOT EXISTS publicaciones(
+                id_publicacion INTEGER PRIMARY KEY AUTOINCREMENT,
+                fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+                cantidadLikes REAL DEFAULT 0,
+                id_usuario INTEGER NOT NULL,
+                FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+            );
+            CREATE TABLE IF NOT EXISTS comentarios(
+                id_comentario INTEGER PRIMARY KEY AUTOINCREMENT,
+                contenido TEXT NOT NULL,
+                id_publicacion INTEGER NOT NULL,
+                id_usuario INTEGER NOT NULL,
+                FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+                FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion) ON DELETE CASCADE
             );
         `);
     }
