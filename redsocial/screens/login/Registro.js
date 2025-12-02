@@ -46,7 +46,7 @@ export default function Registro({navigation}) {
                     value={email}
                     onChangeText={setEmail}
                     style={styles.textInput}
-                    placeholder='hola' //email, password, nombre_usuario, telefono, grupo
+                    placeholder='correo' //email, password, nombre_usuario, telefono, grupo
                 />
                 <Text style={styles.textoContainer}>Contraseña</Text>
                 <TextInput
@@ -104,11 +104,12 @@ fondo:{
 },
 container:{
     backgroundColor:'#ffffffff',
-    width:'70%',
+    width:'85%',
     height:'75%',
     borderRadius:25,
     alignContent:'center',
     marginBottom:'35%',
+    elevation:12,
 },
 logo:{
     marginBottom:20,
@@ -163,9 +164,10 @@ boton:{
     backgroundColor:'#abb6ffff',
     marginLeft:'30%',
     paddingVertical:12,
+    marginBottom:15,
     width:150,
     borderRadius:15,
-    elevation:5,
+    elevation:12,
     shadowColor:'#00000056',
     shadowOffset:{
         width:0,
