@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 export default function LoginStack(){
     return(
-        <Stack.Navigator initialRouteName="EdPerfil" screenOptions={{headerShown: false}}>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
             <Stack.Screen name="EdPerfil" component={EdPerfil} />
             <Stack.Screen name="EditarEvento" component={EditarEvento} />
             <Stack.Screen name="home" component={home} />

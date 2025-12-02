@@ -26,6 +26,8 @@ import MisEventos from './screens/eventos/MisEventos';
 import EventosStack from './screens/eventos/EventosStack'
 import CrearEvento from './screens/eventos/CrearEvento';
 
+import RootStack from './screens/RootStack';
+
 
 
 export default function App() {
@@ -41,7 +43,8 @@ export default function App() {
   }, []);
   return (
       <NavigationContainer>
-        <LoginStack />
+       {/*  <LoginStack /> */}
+       <RootStack />
         {/* <EventosStack/> */}
       </NavigationContainer>
   );

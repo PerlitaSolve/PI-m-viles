@@ -26,7 +26,7 @@ export default function Sesion({navigation}) {
     }
     
   return (
-    <>  {/* <MisEventos/> */}
+    <>
         {logueado?(
             <CrearEvento/>
         ):(

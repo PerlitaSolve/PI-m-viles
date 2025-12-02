@@ -5,7 +5,7 @@ const Stack = createStackNavigator();
 
 export default function perfilStackStack(){
     return(
-        <Stack.Navigator initialRouteName="Perfil">
+        <Stack.Navigator initialRouteName="Perfil" screenOptions={{headerShown: false}}>
             <Stack.Screen name="Perfil" component={Perfil} />
             <Stack.Screen name="EdPerfil" component={EdPerfil} />
         </Stack.Navigator>

@@ -40,7 +40,11 @@ export default function CrearEvento({navigation}) {
           style={styles.logo}
           source={require('../../assets/LogoPI.png')}
           />
-          <Ionicons name="person-circle-outline" size={60} color='#fff'/>
+          <Pressable
+            onPress={() => navigation.navigate('PerfilStack', { screen: 'Perfil' })}
+          >
+            <Ionicons name="person-circle-outline" size={60} color="#fff" />
+          </Pressable>
       </View>
 
       <View>
@@ -97,7 +101,7 @@ fondo:{
 },
 separador:{
   flexDirection:'row',
-  gap:250,
+  gap:210,
   marginTop:15,
 },
 logo:{
