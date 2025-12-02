@@ -18,17 +18,17 @@ export default function MisEventos({navigation}){
         try{
             setCarganding(true);
             
-            // Cargar eventos creados por el usuario
+
             const eventosData= await controllerE.obtenerEventosUsuario();
             setEventos(eventosData);
             console.log(`${eventosData.length} eventos recuperados.`);
             
-            // Cargar eventos a los que el usuario se ha unido
+
             const participaciones = await controllerP.getParticipacionesUsuario();
             const todosLosEventos = await controllerE.obtenerEventos();
             const userId = controller.getCurrentUserId();
             
-            // Filtrar eventos donde el usuario es participante pero no creador
+
             const eventosUnidosData = todosLosEventos.filter(evento => {
                 const esParticipante = participaciones.some(p => p.id_evento === evento.id_evento);
                 const esCreador = evento.id_usuario === userId;
@@ -179,8 +179,8 @@ export default function MisEventos({navigation}){
                     </View >                             
                 </View>
                 <View style={styles.separadorbotones}>
-                    <Pressable style={styles.botonVer}>
-                        <Ionicons name="pencil-outline" size={22} color='white'/>
+                    <Pressable style={styles.botonVer} onPress={() => navigation.navigate('EditarEvento', { evento: item })}>
+                        <Ionicons name="pencil-outline" size={22} color='white' />
                         <Text style={styles.textoBoton}>EDITAR</Text>
                     </Pressable>  
                     <Pressable style={styles.boton} onPress={() =>cancelar(item.id_evento)}>

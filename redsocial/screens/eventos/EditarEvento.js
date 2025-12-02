@@ -4,7 +4,8 @@ import { Ionicons } from '@expo/vector-icons'
 
 const { width, height } = Dimensions.get('window');
 
-export default function EditarEvento({navigation}) {
+export default function EditarEvento({navigation,route}) {
+    const { evento } = route.params
 
     return (
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
