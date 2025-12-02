@@ -16,6 +16,17 @@ class DatabaseService {
                 telefono TEXT,
                 grupo TEXT
             );
+            CREATE TABLE IF NOT EXISTS eventos(
+                id_evento INTEGER PRIMARY KEY AUTOINCREMENT,
+                id_usuario INTEGER,
+                nombre TEXT,
+                descripcion TEXT,
+                ubicacion TEXT,
+                fecha TEXT,
+                hora TEXT,
+                duracion TEXT,
+                imagen TEXT,
+            );
         `);
     }
     async registrarUsuario(email, password, nombre_usuario, telefono, grupo) {
@@ -37,5 +48,51 @@ class DatabaseService {
             throw new Error('Usuario no encontrado');
         }
     }
+
+
+    // ============================================================================================================
+    //                                                 EVENTOS
+    // ============================================================================================================
+    async getAllEventos() {
+        return await this.db.getAllAsync(`SELECT * FROM eventos`)
+    }
+    async getALlEventosUsuario() {
+        /* const userId = this.getCurrentUserId();  */
+        const userId = 1
+        return await this.db.getAllAsync(`SELECT * FROM eventos WHERE id_usuario = ?`, userId)
+    }
+    // TODO: AGREGAR ID_USUARIO
+
+    async addEvento(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen) {
+        /* const userId = this.getCurrentUserId() */
+        const userId = 1
+        Evento.validarDatos(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen)
+        const result = await this.db.runAsync(`INSERT INTO eventos (id_evento, id_usuario, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        userId, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen)
+        return { id: result.lastInsertRowId, id_usuario: userId, nombre, descripcion, ubicacion, fecha, hora, duracion, imagen}
+    }
+
+    async updateEvento(id_evento, nuevosValores) {
+        /* const userId = this.getCurrentUserId();  */
+        const userId = 1
+        const {nombre, descripcion, ubicacion, fecha, hora, duracion, imagen} = nuevosValores
+        Evento.validarDatos(nombre, descripcion, ubicacion, fecha, hora, duracion, imagen)
+
+        await this.db.runAsync(`UPDATE eventos SET
+            nombre = ?, descripcion = ?, ubicacion = ?, fecha = ?, hora = ?, duracion = ?, imagen = ?
+            WHERE id_evento = ? AND id_usuario = ?`,
+            nombre, descripcion, ubicacion, fecha, hora, duracion, imagen, id_evento, userId
+        )
+        return {id_evento, ...nuevosValores}
+    }
+
+    async deleteEvento(id_evento) {
+        /* const userId = this.getCurrentUserId();  */
+        const userId = 1
+        await this.db.runAsync(`DROP FROM eventos WHERE id_evento = ? AND id_usuario = ?`, id_evento, userId)  
+        return true      
+    }
+
 }
 export default new DatabaseService();

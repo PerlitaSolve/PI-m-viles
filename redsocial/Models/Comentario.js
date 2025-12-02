@@ -1,8 +1,8 @@
 export class Comentario {
-    constructor(id_comentario, contenido, id_publicacion, id_comentador){
+    constructor(id_comentario, contenido, id_evento, id_comentador){
         this.id_comentario = id_comentario
         this.contenido = contenido
-        this.id_publicacion = id_publicacion
+        this.id_evento = id_evento
         this.id_comentador = id_comentador
     }
 
