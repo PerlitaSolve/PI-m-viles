@@ -1,10 +1,13 @@
-import { Text, StyleSheet, View ,ImageBackground,Image,Pressable,TextInput} from 'react-native'
+import { Text, StyleSheet, View ,ImageBackground,Image,Pressable,TextInput, Dimensions, ScrollView} from 'react-native'
 import React, { Component } from 'react'
 import { Ionicons } from '@expo/vector-icons'
+
+const { width, height } = Dimensions.get('window');
 
 export default function EditarEvento({navigation}) {
 
     return (
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageBackground
         style={styles.fondo}
         source={require('../../assets/Fondo4.png')}>
@@ -14,7 +17,7 @@ export default function EditarEvento({navigation}) {
                 source={require('../../assets/LogoPI.png')}
 
                 />
-                <Ionicons name="person-circle-outline" size={60} color='#fff'/>
+                <Ionicons name="person-circle-outline" size={width > 600 ? 60 : 45} color='#fff'/>
             </View>
             <View>
             <Text style={styles.texto}>EDITAR EVENTO</Text>
@@ -91,9 +94,7 @@ export default function EditarEvento({navigation}) {
                     </Pressable>                   
                     </View>                 
 
-                   
-                    
-                    
+                                      
                 </View>
                 <Pressable style={styles.boton2}>
                     <Text style={styles.textoBoton}>ACTUALIZAR</Text>
@@ -102,37 +103,39 @@ export default function EditarEvento({navigation}) {
 
                
                 
+                
+
             </View>
 
         </ImageBackground>
-    )
-  
-}
+        </ScrollView>
+    )}
 
 const styles = StyleSheet.create({
     fondo:{
         width:'100%',
-        height:'100%',
+        minHeight:'100%',
         flex:1,
         resizeMode:'cover',
-        justifyContent:'center',
-        alignItems:'center',
-    },
-    container:{
-        height:'80%',
-        width:'80%',
-        backgroundColor:'#f8f8f8ff',    
-        marginBottom:15,
-        borderRadius:25,
         justifyContent:'flex-start',
         alignItems:'center',
-
-    // flex:1,
+        paddingBottom: 40,
+    },
+    container:{
+        height: '80%',
+        width: 350 ,
+        backgroundColor:'#f8f8f8ff',    
+        marginBottom: 15,
+        marginTop:10,
+        borderRadius: 25,
+        justifyContent:'flex-start',
+        alignItems:'center',
+        paddingVertical: 20,
     },
     separador:{
         flexDirection:'row',
-        gap:350,
-        marginTop:15,
+        gap: 200,
+        marginBottom:10,
    },
     separadortexto:{
         flexDirection:'row',
@@ -145,23 +148,25 @@ const styles = StyleSheet.create({
         marginTop:15,
    },
         logo:{
-        height:70,
-        width:70,
+        height:50,
+        width: 50,
         zIndex:2,
         marginTop:0,
     },
     texto:{
-        fontSize:25,
+        fontSize: 20,
         fontWeight:'550',
         color:'#fff',
-        marginBottom:15,
+        marginBottom: 15,
+        marginTop: 10,
     },
     inputPrincipal:{
-        padding:8,
-        width:225,
+        padding: 4,
+        width:300 ,
         backgroundColor:'#e2dedeff',
-        borderRadius:10,
-        flex:1,
+        borderRadius:15,
+        fontSize:12,
+        height:30,
         shadowColor:'#c0bdbdff',
         shadowOffset:{
             width:0,
@@ -169,11 +174,12 @@ const styles = StyleSheet.create({
         },         
     },
     inputPeqes:{
-        padding:8,
-        width:125,
+        padding: 4,
+        width: 140,
         backgroundColor:'#e2dedeff',
         borderRadius:10,
-        flex:1,
+        fontSize: 11,
+        height: 30,
         shadowColor:'#c0bdbdff',
         shadowOffset:{
             width:0,
@@ -183,21 +189,26 @@ const styles = StyleSheet.create({
     centrarTitulo:{
         justifyContent:'center',
         alignItems:'center',
-        marginTop:35,
+        marginTop:  20,
         marginBottom:5,
+        width: '100%',
     },
     fila:{
-    flexDirection:'row',
-    gap:80,
-    marginTop:15,
+        flexDirection: 'row',
+        justifyContent:'center',    
+        alignItems:'center',        
+        gap: 20,                    
+        marginTop: 5,
+        width: '100%',              
     },
+
+
     labelDescripcion:{
-    marginTop:19,
-    marginBottom:5,
-    fontSize:16.5,
+    marginTop:10,
+    marginBottom: 2,
+    fontSize:  12,
     fontWeight:'500',
     color:'#042674ff',
-
     },
 
     columna:{
@@ -206,19 +217,20 @@ const styles = StyleSheet.create({
     },
 
     label:{
-        fontSize:16.5,
+        fontSize:12,
         fontWeight:'500',
         marginBottom:5,
         color:'#042674ff',
     },
     inputDescripcion:{
-        width:300,
-        height:150,
-        padding:10,
+        width: 300 ,
+        height:100, 
+        padding:6,
         backgroundColor:'#e2dedeff',
         borderRadius:10,
         textAlignVertical:'top',
         textAlign:'left',
+        fontSize: 15,
         shadowColor:'#c0bdbdff',
         shadowOffset:{
             width:0,
@@ -226,13 +238,13 @@ const styles = StyleSheet.create({
         },        
     },
     foto1:{
-        width:200,
-        height:120,
+        width:150,
+        height: 90,
         backgroundColor:'#6e6e6eff',     
         marginBottom:15,
         overflow:'hidden',
         position:'absolute',  
-        right:80,    
+        right: 60,    
         zIndex:9,  
         top:10,
         borderRadius:20,
@@ -243,12 +255,12 @@ const styles = StyleSheet.create({
         },
     },
     foto2:{
-        width:200,
-        height:120,
+        width: 150,
+        height: 90,
         backgroundColor:'#177246ff',     
         overflow:'hidden',
         position:'absolute',
-        left:80,
+        left: 80,
         zIndex:10,
         borderRadius:20,
         top:-10,
@@ -260,7 +272,7 @@ const styles = StyleSheet.create({
     },
     contFotos:{
     width:'100%',
-    height:150,
+    height: 200,
     alignItems:'center',
     justifyContent:'center',
     marginTop:20,
@@ -275,12 +287,14 @@ const styles = StyleSheet.create({
     },
     separadoricons:{
         flexDirection:'row',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        gap:50,
-        marginTop:10, 
-        marginLeft:15,      
+        justifyContent:'center',    
+        alignItems: 'center',       
+        gap: 15,
+        marginTop: 20,
+        width: '100%',              
+        position: 'relative',
     },
+
     iconLocation:{
         overflow:'hidden',
         position:'absolute',
@@ -291,8 +305,8 @@ const styles = StyleSheet.create({
     iconLocation2:{
         overflow:'hidden',
         position:'absolute',
-        bottom:-2,
-        right:172,
+        bottom: 80,
+        right: 50,
 
     },   
     iconLocation3:{
@@ -304,7 +318,7 @@ const styles = StyleSheet.create({
     },
     boton2:{
         backgroundColor:'#abb6ffff',
-        width:120,
+        width: width > 600 ? 120 : 100,
         height:40,
         borderRadius:20,
         paddingVertical:6,
@@ -318,22 +332,23 @@ const styles = StyleSheet.create({
         },
     },
     textoBoton:{
-        fontSize:16,
+        fontSize:15,
         fontWeight:'500',
         color:'white',
     },
     textoBoton1:{
-        fontSize:16,
+        fontSize: 12,
         fontWeight:'500',
         color:'white',
     },    
     alinear:{
         textAlign:'left',
         justifyContent:'flex-start',
+        width: 130,
     },
     boton1:{
         backgroundColor:'#5bc86dff',
-        width:125,
+        width: 140,
         height:34,
         borderRadius:10,
         paddingVertical:6,
