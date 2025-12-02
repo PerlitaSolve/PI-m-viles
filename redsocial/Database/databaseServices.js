@@ -11,8 +11,8 @@ class DatabaseService {
         this.db = await SQLite.openDatabaseAsync('redsocial.db');
         //Si ocupas limpiar tu tabla de usuarios, descomentas esta linwa
         // await this.db.execAsync(`DROP TABLE IF EXISTS usuarios`);
-        await this.db.execAsync('PRAGMA foreign_keys= ON');
         await this.db.execAsync(`
+            PRAGMA foreign_keys = ON;
             CREATE TABLE IF NOT EXISTS usuarios(
                 id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
                 email TEXT UNIQUE,
@@ -62,16 +62,6 @@ class DatabaseService {
                 id_usuario INTEGER
             );
         `);
-        await this.db.execAsync(`
-            CREATE TABLE IF NOT EXISTS reacciones(
-                id_reaccion INTEGER PRIMARY KEY AUTOINCREMENT,
-                id_evento INTEGER,
-                id_usuario INTEGER,
-                fecha TEXT DEFAULT (datetime('now')),
-                FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
-                FOREIGN KEY (id_evento) REFERENCES eventos(id_evento)
-            );   
-        `)
     }
     async registrarUsuario(email, password, nombre_usuario, telefono, grupo) {
         await this.db.runAsync(
