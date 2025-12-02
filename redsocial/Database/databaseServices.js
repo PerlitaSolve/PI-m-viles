@@ -45,7 +45,6 @@ class DatabaseService {
                 id_usuario INTEGER NOT NULL,
                 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
                 FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion) ON DELETE CASCADE,
-                imagen TEXT
             );
         `);
     }
