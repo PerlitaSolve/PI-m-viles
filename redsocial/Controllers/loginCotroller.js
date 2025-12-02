@@ -63,5 +63,14 @@ export class LoginController{
     notifyListeners(mensaje){
         this.listeners.forEach(callback=>callback(mensaje));
     }
+    getCurrentUserId(){
+        return this.currentUser? this.currentUser.id_usuario: null;
+    }
+    getCurrentNombre(){
+        return this.currentUser? this.currentUser.nombre_usuario: null;
+    }
+    gerCurrentUser(){
+        return this.currentUser?this.currentUser: null;
+    }
     
 }

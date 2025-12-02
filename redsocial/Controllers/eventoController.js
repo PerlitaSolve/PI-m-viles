@@ -1,7 +1,7 @@
 import { Evento } from "../Models/Evento";
 import databaseServices from "../Database/databaseServices";
 
-export class eventoController {
+export class EventoController {
     constructor(){
         this.listeners=[]
     }
@@ -27,6 +27,15 @@ export class eventoController {
         catch(error) {
             console.error('Error al obtener eventos: ', error)
             throw new Error('No se pudieron cargar los eventos')
+        }
+    }
+
+    async getCantidadParticipantes(id_evento){
+        try{
+            const cantidad= await databaseServices.getCantidadParticipantes(id_evento);
+            return cantidad;
+        }catch(error){
+            throw new Error(error.message);
         }
     }
     async obtenerEventosUsuario() {

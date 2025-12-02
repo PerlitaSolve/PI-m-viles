@@ -91,9 +91,10 @@ class DatabaseService {
         return await this.db.getAllAsync(`SELECT * FROM eventos`)
     }
     async getAllEventosUsuario() {
-        /* const userId = this.getCurrentUserId();  */
-        const userId = 1
-        return await this.db.getAllAsync(`SELECT * FROM eventos WHERE id_usuario = ?`, userId)
+        //const userId = this.getCurrentUserId();  
+        //const userId = 1
+        const userID= controller.getCurrentUserId();
+        return await this.db.getAllAsync(`SELECT * FROM eventos WHERE id_usuario = ?`, userID)
     }
     // TODO: AGREGAR ID_USUARIO
 
@@ -136,6 +137,10 @@ class DatabaseService {
 
     async getAllParticipantes(id_evento){
         return await this.db.getAllAsync(`SELECT * FROM participantes WHERE id_evento = ?`, id_evento)
+    }
+    async getCantidadParticipantes(id_evento){
+        const result= await this.db.getAllAsync(`SELECT COUNT(*) as cantidad FROM participantes WHERE id_evento = ?`, [id_evento]);
+        return result[0]?.cantidad||0;
     }
 
     async addParticipante(id_evento) {
