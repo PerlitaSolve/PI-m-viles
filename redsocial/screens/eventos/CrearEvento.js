@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, ImageBackground, Image, Pressable, TextInput, Alert } from 'react-native'
+import { ScrollView,StyleSheet, Text, View, ImageBackground, Image, Pressable, TextInput, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { EventoController } from '../../Controllers/eventoController'
+import * as ImagePicker from 'expo-image-picker';
 
 export default function CrearEvento({navigation}) {
   const [nombre, setNombre] = useState("")
@@ -10,8 +11,7 @@ export default function CrearEvento({navigation}) {
   const [fecha, setFecha] = useState("")
   const [hora, setHora] = useState("")
   const [duracion, setDuracion] = useState("")
-  const [imagen, setImagen] = useState("")
-
+  const [imagen, setImagen] = useState(null);
   const eventoController = new EventoController()
 
 
@@ -27,6 +27,21 @@ export default function CrearEvento({navigation}) {
     }
   }
 
+
+ 
+
+async function pickImage() {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images, 
+    allowsEditing: true,
+    // aspect: [4, 3], 
+    quality: 1,
+  });
+
+  if (!result.canceled && result.assets && result.assets.length > 0) {
+    setImagen(result.assets[0].uri);
+  }
+}
 
 
 
@@ -52,7 +67,7 @@ export default function CrearEvento({navigation}) {
         <Text style={styles.texto2}>Llena todos los campos para añadir tu evento</Text>
       </View>
 
-      <View style={styles.cuadro}>
+      <ScrollView style={styles.cuadro}>
         <View>
             <Text style={styles.subtitulo}>Nombre del Evento</Text>
             <TextInput placeholder='Nombre del evento' style={styles.input} value={nombre} onChangeText={setNombre}></TextInput>
@@ -74,8 +89,15 @@ export default function CrearEvento({navigation}) {
 
             <Text style={styles.subtitulo}>Duracion del evento</Text>
             <TextInput placeholder='Duracion' style={styles.input} value={duracion} onChangeText={setDuracion}></TextInput>
-
-              <Pressable style={styles.boton} onPress={handleCrearEvento}>
+            
+              
+            <Pressable onPress={pickImage}>
+              <Text>Seleccionar imagen</Text>
+            </Pressable>
+            {imagen?(
+              <Image source={{uri:imagen}} style={{width: 100, height:100, marginTop:10, alignSelf:'center'}}></Image>
+            ):(null)}
+            <Pressable style={styles.boton} onPress={handleCrearEvento}>
                 <Text style={styles.bText}>CREAR EVENTO</Text>
             </Pressable>
 
@@ -84,7 +106,7 @@ export default function CrearEvento({navigation}) {
             </Pressable>
 
         </View>
-      </View>
+      </ScrollView>
 
     </ImageBackground>
   )
@@ -146,6 +168,7 @@ boton:{
   alignItems:'center',
   alignContent:'center',
   alignSelf:'center',
+  marginTop: 10,
 },
 boton2:{
   backgroundColor:'rgba(255, 255, 255, 0)',

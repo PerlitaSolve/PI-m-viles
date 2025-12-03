@@ -44,7 +44,10 @@ export default function MisEventos({navigation}){
             setCarganding(false);
         }
     },[controllerE]); /* asdkfs */
+    useEffect(() => {
+        cargarEventos();
 
+    }, []);
     useEffect(() => {
         const cargarAsistentes = async () => {
             const cantidades = {};
@@ -61,9 +64,7 @@ export default function MisEventos({navigation}){
         }
     }, [eventosUnidos, eventos]);
 
-    useEffect(() => {
-        cargarEventos();
-    }, []);
+
 
 
     const cancelar = async(id_evento) => {
