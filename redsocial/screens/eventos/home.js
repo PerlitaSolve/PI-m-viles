@@ -131,10 +131,9 @@ export default function Home({ navigation }) {
     >
 
       <View style={styles.header}>
-          <Image
-          style={styles.logo}
-          source={require('../../assets/LogoPI.png')}
-          />
+        <Pressable onPress={() => navigation.navigate('Notificaciones')} >
+          <Ionicons name="notifications-outline" size={60} color="#fff" />
+        </Pressable>
         
         <Text style={styles.tituloHome}>HOME</Text>
 
