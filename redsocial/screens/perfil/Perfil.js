@@ -75,8 +75,12 @@ export default function Perfil({navigation}) {
               <Text style={styles.text}>Correo Electrónico</Text>
               <TextInput placeholder={userData.email} style={styles.input} ></TextInput>
 
-                <Pressable style={styles.boton} onPress={()=> navigation.navigate('EdPerfil')}>
+              <Pressable style={styles.boton} onPress={()=> navigation.navigate('EdPerfil')}>
                   <Text style={styles.bText}>EDITAR PERFIL</Text>
+              </Pressable>
+
+              <Pressable style={styles.botonCS} onPress={()=> navigation.navigate('LoginStack',{screen:'Login'})}>
+                  <Text style={styles.bText}>CERRAR SESIÓN</Text>
               </Pressable>
 
           </View>
@@ -155,6 +159,18 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontFamily:"Instrument Sans",
         backgroundColor:'#80A0EB',
+        borderRadius:10,
+        marginTop:20,
+        textAlign:'center',
+        height:45,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    botonCS:{
+        color:'#fff',
+        fontSize:14,
+        fontFamily:"Instrument Sans",
+        backgroundColor:'#eb8080ff',
         borderRadius:10,
         marginTop:20,
         textAlign:'center',
