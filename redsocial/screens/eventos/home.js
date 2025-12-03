@@ -156,6 +156,12 @@ export default function Home({ navigation }) {
           value={searchText}
           onChangeText={setSearchText} 
         />
+        <Pressable 
+            style={styles.recargarButton}
+            onPress={cargarEventos}
+        >
+            <Ionicons name='refresh' size={24}></Ionicons>
+        </Pressable>
       </View>
 
       {/* <ScrollView contentContainerStyle={{ paddingBottom: 80 }} nestedScrollEnabled={true}> */}

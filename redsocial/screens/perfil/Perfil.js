@@ -134,6 +134,8 @@ const styles = StyleSheet.create({
         borderRadius:10,
         width:300,
         alignItems:'center',
+        alignSelf: 'center',
+        marginBottom: 20,
     },
     input:{
         borderWidth:1,

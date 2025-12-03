@@ -1,9 +1,10 @@
-import { Text, StyleSheet, View,Image,ImageBackground,TextInput,Pressable, Alert} from 'react-native'
+import { ScrollView,Text, StyleSheet, View,Image,ImageBackground,TextInput,Pressable, Alert} from 'react-native'
 import React, { Component } from 'react';
 import { useState, useEffect} from 'react';
 // import { LoginController } from '../../Controllers/loginCotroller';
 // const controller = new LoginController();
 import { controller } from '../../Controllers';
+// import { ScrollView } from 'react-native-gesture-handler';
 export default function Registro({navigation}) {
     const [nombre, setNombre]= useState('');
     const [email, setEmail]= useState('');
@@ -33,6 +34,7 @@ export default function Registro({navigation}) {
         source={require('../../assets/Fondo1.png')}
         style={styles.fondo}
         >
+            
         <View style={styles.logo}>
             <Image source={require('../../assets/LogoPI.png')}
              style={styles.logoima}/> 
@@ -40,62 +42,65 @@ export default function Registro({navigation}) {
            
         </View>
         <View style={styles.container}>
-            <View style={styles.interiorCont}>
-                <Text style={styles.titulotext}>REGISTRARSE</Text>
-            </View>
-            <View style={styles.cajaPrincipal}>
-                <Text style={styles.textoContainer}>Correo Electronico</Text>
-                <TextInput
-                    value={email}
-                    onChangeText={setEmail}
-                    style={styles.textInput}
-                    placeholder='correo' //email, password, nombre_usuario, telefono, grupo
-                />
-                <Text style={styles.textoContainer}>Contraseña</Text>
-                <TextInput
-                    value={password}
-                    onChangeText={setPassword}
-                    style={styles.textInput}
-                    placeholder='contrasena'
-                />  
-                <Text style={styles.textoContainer}>Nombre de Usuario</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Nombre'
-                    value={nombre}
-                    onChangeText={setNombre}
-                />
-                <Text style={styles.textoContainer}>Telefono</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='telefono'
-                    value={telefono}
-                    onChangeText={setTelefono}
-                />   
-                <Text style={styles.textoContainer}>Grupo</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Grupo'
-                    value={grupo}
-                    onChangeText={setGrupo}
-                /> 
-                <Text style={styles.textoContainer}>Nombre de tu primera mascota (INGRESA EN MAYÚSCULAS)</Text>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='EJ: FIDO'
-                    value={seguridad}
-                    onChangeText={setSeguridad}
-                /> 
-                <View>
-                    <Pressable style={styles.boton} onPress={registrandoUsuario}>
-                        <Text style={styles.textoBoton}>REGISTRAR</Text>
-                    </Pressable>
-                    <Pressable style={styles.Cancelar} onPress={() => navigation.goBack()}>
-                        <Text style={styles.textoCancelar}>CANCELAR</Text>
-                    </Pressable>                    
-                </View>                                                 
-            </View>
+            <ScrollView>
 
+            
+                <View style={styles.interiorCont}>
+                    <Text style={styles.titulotext}>REGISTRARSE</Text>
+                </View>
+                <View style={styles.cajaPrincipal}>
+                    <Text style={styles.textoContainer}>Correo Electronico</Text>
+                    <TextInput
+                        value={email}
+                        onChangeText={setEmail}
+                        style={styles.textInput}
+                        placeholder='correo' //email, password, nombre_usuario, telefono, grupo
+                    />
+                    <Text style={styles.textoContainer}>Contraseña</Text>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        style={styles.textInput}
+                        placeholder='contrasena'
+                    />  
+                    <Text style={styles.textoContainer}>Nombre de Usuario</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Nombre'
+                        value={nombre}
+                        onChangeText={setNombre}
+                    />
+                    <Text style={styles.textoContainer}>Telefono</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='telefono'
+                        value={telefono}
+                        onChangeText={setTelefono}
+                    />   
+                    <Text style={styles.textoContainer}>Grupo</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Grupo'
+                        value={grupo}
+                        onChangeText={setGrupo}
+                    /> 
+                    <Text style={styles.textoContainer}>Nombre de tu primera mascota (INGRESA EN MAYÚSCULAS)</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='EJ: FIDO'
+                        value={seguridad}
+                        onChangeText={setSeguridad}
+                    /> 
+                    <View>
+                        <Pressable style={styles.boton} onPress={registrandoUsuario}>
+                            <Text style={styles.textoBoton}>REGISTRAR</Text>
+                        </Pressable>
+                        <Pressable style={styles.Cancelar} onPress={() => navigation.goBack()}>
+                            <Text style={styles.textoCancelar}>CANCELAR</Text>
+                        </Pressable>                    
+                    </View>                                                 
+                </View>
+            </ScrollView>
         </View>
 
         </ImageBackground>
@@ -120,6 +125,7 @@ container:{
     alignContent:'center',
     marginBottom:'35%',
     elevation:12,
+    // padding: 15,
 },
 logo:{
     marginBottom:20,
@@ -202,6 +208,7 @@ Cancelar:{
     alignItems:'center',
     justifyContent:'center',
     marginTop:5,
+    marginBottom: 15,
 },
 textoCancelar:{
     color:'#6774cbff',
